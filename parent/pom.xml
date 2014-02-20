@@ -26,7 +26,6 @@
     </properties>
 
 
-
     <pluginRepositories>
         <pluginRepository>
             <id>maven2-repository.dev.java.net</id>
@@ -159,6 +158,12 @@
                 <artifactId>spring-web</artifactId>
                 <version>${org.springframework.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${org.springframework.version}</version>
+                <scope>test</scope>
+            </dependency>
 
             <!--
                 Spring MVC for Servlet Environments (depends on spring-core, spring-beans, spring-context, spring-web)
@@ -178,11 +183,23 @@
             </dependency>
 
 
-
-
         </dependencies>
     </dependencyManagement>
-
+    <dependencies>
+        <!-- Test -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.2</version>
+            <scope>test</scope>
+        </dependency>
+        <!--Apache-commons-->
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
+    </dependencies>
     <build>
 
         <plugins>
