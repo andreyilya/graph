@@ -25,7 +25,7 @@ public class JpaSupport<ENTITY, ID extends Serializable> {
 
     @PostConstruct
     public void init() {
-        repository = new SimpleJpaRepository<>(getPersistentClass(), em);
+        repository = new SimpleJpaRepository<ENTITY, ID>(getPersistentClass(), em);
     }
 
     /**

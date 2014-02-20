@@ -1,5 +1,6 @@
 package graph.engine.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 /**
@@ -8,6 +9,8 @@ import javax.persistence.Entity;
  */
 @Entity
 public class CityEntity {
+
+    @Column
     private String name;
 
     public String getName() {
