@@ -1,5 +1,7 @@
 package graph.engine.model;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import org.springframework.data.annotation.Id;
 
 /**
@@ -8,6 +10,7 @@ import org.springframework.data.annotation.Id;
  */
 public abstract class Identifiable {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
 
     public String getId() {
