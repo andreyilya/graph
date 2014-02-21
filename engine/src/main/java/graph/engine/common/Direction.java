@@ -1,4 +1,4 @@
-package graph.engine.model;
+package graph.engine.common;
 
 /**
  * User: a.radkov

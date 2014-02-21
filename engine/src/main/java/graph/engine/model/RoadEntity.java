@@ -1,5 +1,6 @@
 package graph.engine.model;
 
+import graph.engine.common.Direction;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
