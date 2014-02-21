@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * Time: 17:41
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
+@ContextConfiguration(locations = {"classpath:META-INF/applicationContext.xml"})
 public class CityDaoImplTest {
 	@Autowired
 	private CityRepository cityRepository;
