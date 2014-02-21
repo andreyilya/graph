@@ -16,6 +16,12 @@
 
 <div class="notes">
     <h1>Граф</h1>
+
 </div>
+
+<script src="resources/js/jquery.min.js" type="text/javascript"></script>
+<script src="resources/js/jquery.jsPlumb-1.5.5.js"  type="text/javascript"></script>
+<script src="resources/js/demo.js"  type="text/javascript"></script >
+<script src="resources/js/demo-list.js"  type="text/javascript"></script >
 </body>
 </html>
