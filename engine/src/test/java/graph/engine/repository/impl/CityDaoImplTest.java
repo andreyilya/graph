@@ -22,6 +22,7 @@ public class CityDaoImplTest {
 
 	@Test
 	public void testSaveCity(){
-		cityRepository.save(new CityEntity());
+        CityEntity cityEntity = new CityEntity();
+        cityRepository.save(cityEntity);
 	}
 }
