@@ -12,7 +12,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>parent</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>${version}</version>
     <packaging>pom</packaging>
 
     <name>graph: parent</name>
@@ -20,7 +20,7 @@
     <properties>
         <org.springframework.version>4.0.1.RELEASE</org.springframework.version>
         <hibernate.version>4.3.1.Final</hibernate.version>
-
+        <version>1.0-SNAPSHOT</version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <javaVersion>1.7</javaVersion>
 

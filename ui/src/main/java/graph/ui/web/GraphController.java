@@ -1,6 +1,8 @@
 package graph.ui.web;
 
+import graph.engine.service.api.CityService;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -13,9 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class GraphController {
 
-    private static final String USER = "user";
-    private static final String USER_ID = "userId";
-
+    @Autowired
+    private CityService cityService;
 
     @RequestMapping("test")
     public String listUsers(Map<String, Object> map) {
