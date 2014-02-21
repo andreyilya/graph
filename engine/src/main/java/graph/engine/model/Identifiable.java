@@ -1,16 +1,20 @@
 package graph.engine.model;
 
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import org.hibernate.annotations.GenericGenerator;
+
 
 /**
  * User: a.radkov
  * Date: 20.02.14
  */
+@MappedSuperclass
 public abstract class Identifiable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
 
     public String getId() {
