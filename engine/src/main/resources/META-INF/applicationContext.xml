@@ -22,10 +22,11 @@
 
     <bean id="entityManagerFactory"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
-          p:persistenceUnitName="mysql">
-        <!--TODO: to mysql-->
+          p:persistenceUnitName="postgresql">
         <property name="jpaVendorAdapter">
-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" >
+                <property name="database" value="POSTGRESQL"/>
+            </bean>
         </property>
     </bean>
 
