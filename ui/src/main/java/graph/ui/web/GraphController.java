@@ -18,9 +18,9 @@ public class GraphController {
     @Autowired
     private CityService cityService;
 
-    @RequestMapping("test")
-    public String listUsers(Map<String, Object> map) {
-        return "test";
+    @RequestMapping("/graph")
+    public String getGraphPage(Map<String, Object> map) {
+        return "/graph";
     }
 
 
