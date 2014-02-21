@@ -1,7 +1,11 @@
 package graph.engine.model;
 
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 
 /**
  * User: a.radkov
@@ -15,6 +19,9 @@ public class CityEntity extends Identifiable {
 
     @Column
     private Integer population;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private List<RoadEntity> roads;
 
     public String getName() {
         return name;
@@ -30,5 +37,13 @@ public class CityEntity extends Identifiable {
 
     public void setPopulation(Integer population) {
         this.population = population;
+    }
+
+    public List<RoadEntity> getRoads() {
+        return roads;
+    }
+
+    public void setRoads(List<RoadEntity> roads) {
+        this.roads = roads;
     }
 }
