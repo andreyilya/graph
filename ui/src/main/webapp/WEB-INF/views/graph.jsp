@@ -16,7 +16,6 @@
 
 <div class="notes">
     <h1>Граф</h1>
-    <div id="maps"><ul><li><a href="#/africa" class="africa active">Africa</a></li></ul></div>
     <canvas id="viewport" width="1600" height="500"></canvas>
 </div>
 
