@@ -16,12 +16,13 @@
 
 <div class="notes">
     <h1>Граф</h1>
-    <canvas id="viewport" width="auto" height="auto"></canvas>
+    <div id="maps"><ul><li><a href="#/africa" class="africa active">Africa</a></li></ul></div>
+    <canvas id="viewport" width="1600" height="500"></canvas>
 </div>
 
 <script src="resources/js/jquery.min.js" type="text/javascript"></script>
 <script src="resources/js/arbor.js" type="text/javascript"></script>
 <script src="resources/js/arbor-tween.js" type="text/javascript"></script>
-<script src="resources/js/atlas.js" type="text/javascript"></script>
+<script src="resources/js/init-graph.js" type="text/javascript"></script>
 </body>
 </html>
