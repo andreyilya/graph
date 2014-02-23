@@ -125,6 +125,9 @@
     };
 
     $(document).ready(function () {
+        $("#viewport")
+                .attr('width', $(window).width())
+                .attr('height', $(window).height());
         sys = arbor.ParticleSystem(1000); // создаём систему
         sys.parameters({gravity: true, friction: 0.98}); // гравитация вкл
         sys.renderer = Renderer("#viewport"); //начинаем рисовать в выбраной области

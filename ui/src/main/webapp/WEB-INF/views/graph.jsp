@@ -16,7 +16,10 @@
 
 <div class="notes">
     <h1>Граф</h1>
-    <canvas id="viewport" width="1600" height="500"></canvas>
+
+    <div class="wrapper">
+        <canvas id="viewport" ></canvas>
+    </div>
 </div>
 
 <script src="resources/js/jquery.min.js" type="text/javascript"></script>
