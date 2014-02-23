@@ -36,8 +36,12 @@
                             ctx.strokeStyle = "rgba(5,5,5, .333)";	//грани будут чёрным цветом с некой прозрачностью
                             ctx.lineWidth = 1;	//толщиной в один пиксель
                             ctx.beginPath();		//начинаем рисовать
-                            ctx.moveTo(pt1.x, pt1.y); //от точки один
-                            ctx.lineTo(pt2.x, pt2.y); //до точки два
+                            // find the start point
+
+                            var tail = intersect_line_box(pt1, pt2, nodeBoxes[edge.source.name]);
+                            var head = intersect_line_box(tail, pt2, nodeBoxes[edge.target.name]);
+                            ctx.moveTo(tail.x, tail.y); //от точки один
+                            ctx.lineTo(head.x, head.y); //до точки два
                             ctx.stroke();
 
                             ctx.fillStyle = "black";
@@ -45,16 +49,14 @@
                             ctx.fillText(edge.source.name + " - " + edge.target.name, (pt1.x + pt2.x) / 2, (pt1.y + pt2.y) / 2);
 
                             // if (edge.data.directed){   //direction here
-                            // find the start point
                             var weight = edge.data.weight;
-                            var tail = intersect_line_box(pt1, pt2, nodeBoxes[edge.source.name]);
-                            var head = intersect_line_box(tail, pt2, nodeBoxes[edge.target.name]);
+
                             ctx.save();
                             // move to the head position of the edge we just drew
                             var wt = !isNaN(weight) ? parseFloat(weight) : 1;
                             var arrowLength = 8 + wt;
                             var arrowWidth = 3 + wt;
-                            ctx.fillStyle =  "#cccccc";
+                            ctx.fillStyle = "#cccccc";
                             ctx.translate(head.x, head.y);
                             ctx.rotate(Math.atan2(head.y - tail.y, head.x - tail.x));
 
@@ -70,7 +72,7 @@
                             ctx.closePath();
                             ctx.fill();
                             ctx.restore();
-                            //  }
+//                              }
                         });
 
             },
@@ -163,6 +165,6 @@
                 intersect_line_line(p1, p2, br, bl) ||
                 intersect_line_line(p1, p2, bl, tl) ||
                 false
-    } ;
+    };
 
 })(this.jQuery);
