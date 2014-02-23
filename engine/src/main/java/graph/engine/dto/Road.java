@@ -12,9 +12,9 @@ public class Road extends Identifiable {
 
     private String quantity;
 
-    private City leftCity;
+    private City sourceCity;
 
-    private City rightCity;
+    private City targetCity;
 
     private Direction direction;
 
@@ -42,19 +42,19 @@ public class Road extends Identifiable {
         this.direction = direction;
     }
 
-    public City getRightCity() {
-        return rightCity;
+    public City getTargetCity() {
+        return targetCity;
     }
 
-    public void setRightCity(City rightCity) {
-        this.rightCity = rightCity;
+    public void setTargetCity(City targetCity) {
+        this.targetCity = targetCity;
     }
 
-    public City getLeftCity() {
-        return leftCity;
+    public City getSourceCity() {
+        return sourceCity;
     }
 
-    public void setLeftCity(City leftCity) {
-        this.leftCity = leftCity;
+    public void setSourceCity(City sourceCity) {
+        this.sourceCity = sourceCity;
     }
 }

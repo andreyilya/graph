@@ -23,10 +23,10 @@ public class RoadEntity extends Identifiable {
     private String quantity;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    private CityEntity leftCity;
+    private CityEntity sourceCity;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    private CityEntity rightCity;
+    private CityEntity targetCity;
 
     @Enumerated(EnumType.STRING)
     @Column
@@ -56,19 +56,19 @@ public class RoadEntity extends Identifiable {
         this.direction = direction;
     }
 
-    public CityEntity getRightCity() {
-        return rightCity;
+    public CityEntity getTargetCity() {
+        return targetCity;
     }
 
-    public void setRightCity(CityEntity rightCity) {
-        this.rightCity = rightCity;
+    public void setTargetCity(CityEntity targetCity) {
+        this.targetCity = targetCity;
     }
 
-    public CityEntity getLeftCity() {
-        return leftCity;
+    public CityEntity getSourceCity() {
+        return sourceCity;
     }
 
-    public void setLeftCity(CityEntity leftCity) {
-        this.leftCity = leftCity;
+    public void setSourceCity(CityEntity sourceCity) {
+        this.sourceCity = sourceCity;
     }
 }

@@ -123,7 +123,7 @@
     $(document).ready(function () {
         sys = arbor.ParticleSystem(1000); // создаём систему
         sys.parameters({gravity: true, friction: 0.98}); // гравитация вкл
-        sys.renderer = Renderer("#viewport") //начинаем рисовать в выбраной области
+        sys.renderer = Renderer("#viewport"); //начинаем рисовать в выбраной области
 
         $.getJSON("graph-data",	//получаем с сервера файл с данными
 //
