@@ -8,7 +8,7 @@ import graph.engine.common.Direction;
  */
 public class Road extends Identifiable {
 
-    private Long lenght;
+    private Long roadLength;
 
     private String quantity;
 
@@ -18,12 +18,12 @@ public class Road extends Identifiable {
 
     private Direction direction;
 
-    public Long getLenght() {
-        return lenght;
+    public Long getRoadLength() {
+        return roadLength;
     }
 
-    public void setLenght(Long lenght) {
-        this.lenght = lenght;
+    public void setRoadLength(Long roadLength) {
+        this.roadLength = roadLength;
     }
 
     public String getQuantity() {

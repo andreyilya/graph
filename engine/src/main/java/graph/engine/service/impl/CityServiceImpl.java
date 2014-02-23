@@ -28,31 +28,43 @@ public class CityServiceImpl implements CityService {
 
 		City city3 = new City();
 		city3.setName("city3");
+
+		City city4 = new City();
+		city4.setName("city4");
 		CityGraph cityGraph = new CityGraph();
+
+
 
 		cityGraph.addNode(city1);
 		cityGraph.addNode(city2);
 		cityGraph.addNode(city3);
+		cityGraph.addNode(city4);
 
 		Road road1 = new Road();
-		road1.setLenght(1L);
+		road1.setRoadLength(4L);
 		road1.setSourceCity(city1);
 		road1.setTargetCity(city2);
 
 		Road road2 = new Road();
-		road2.setLenght(1L);
+		road2.setRoadLength(12L);
 
 		road2.setSourceCity(city2);
 		road2.setTargetCity(city3);
 
 		Road road3 = new Road();
-		road3.setLenght(1L);
+		road3.setRoadLength(12L);
 		road3.setSourceCity(city3);
 		road3.setTargetCity(city1);
+
+		Road road4 = new Road();
+		road4.setRoadLength(15L);
+		road4.setSourceCity(city3);
+		road4.setTargetCity(city4);
 
 		cityGraph.addEdge(road1);
 		cityGraph.addEdge(road2);
 		cityGraph.addEdge(road3);
+		cityGraph.addEdge(road4);
 
 		return cityGraph;
     }

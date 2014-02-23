@@ -17,7 +17,7 @@
                 //действия при перересовке
                 ctx.fillStyle = "white";	//белым цветом
                 ctx.fillRect(0, 0, canvas.width, canvas.height); //закрашиваем всю область
-                if(particleSystem.parameters().friction<1){
+                if (particleSystem.parameters().friction < 1) {
 
                     particleSystem.parameters({friction: particleSystem.parameters().friction + 0.0001}); // гравитация вкл
                 }
@@ -50,7 +50,7 @@
 
                             ctx.fillStyle = "black";
                             ctx.font = 'italic 11px sans-serif';
-                            ctx.fillText(edge.source.name + " - " + edge.target.name, (pt1.x + pt2.x) / 2, (pt1.y + pt2.y) / 2);
+                            ctx.fillText(edge.data.roadLength + " км", (pt1.x + pt2.x) / 2, (pt1.y + pt2.y) / 2);
 
                             // if (edge.data.directed){   //direction here
                             var weight = edge.data.weight;
@@ -129,7 +129,7 @@
                 .attr('width', $(window).width())
                 .attr('height', $(window).height());
         sys = arbor.ParticleSystem(1000); // создаём систему
-        sys.parameters({gravity: true, friction: 0.98}); // гравитация вкл
+        sys.parameters({gravity: false, friction: 0.98}); // гравитация вкл
         sys.renderer = Renderer("#viewport"); //начинаем рисовать в выбраной области
 
         $.getJSON("graph-data",	//получаем с сервера файл с данными
@@ -142,7 +142,7 @@
 
                     $.each(data.edges, function (i, edge) {
                         //TODO: migrate to id
-                        sys.addEdge(sys.getNode(edge.sourceCity.name), sys.getNode(edge.targetCity.name));	//добавляем грань
+                        sys.addEdge(sys.getNode(edge.sourceCity.name), sys.getNode(edge.targetCity.name), {"roadLength": edge.roadLength});	//добавляем грань
                     });
                 });
 
