@@ -22,15 +22,22 @@ public class CityServiceImpl implements CityService {
     public CityGraph queryGraph(City targetPoint, int recursionDepth) {
 		City city1 = new City();
 		city1.setName("city1");
+		city1.setId("city1");
 
 		City city2 = new City();
 		city2.setName("city2");
+		city2.setId("city2");
+
 
 		City city3 = new City();
 		city3.setName("city3");
+		city3.setId("city3");
+
 
 		City city4 = new City();
 		city4.setName("city4");
+		city4.setId("city4");
+
 		CityGraph cityGraph = new CityGraph();
 
 

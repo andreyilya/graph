@@ -136,13 +136,11 @@
 //
                 function (data) {
                     $.each(data.nodes, function (i, node) {
-                        //TODO: migrate to id
-                        sys.addNode(node.name);	//добавляем вершину
+                        sys.addNode(node.id);	//добавляем вершину
                     });
 
                     $.each(data.edges, function (i, edge) {
-                        //TODO: migrate to id
-                        sys.addEdge(sys.getNode(edge.sourceCity.name), sys.getNode(edge.targetCity.name), {"roadLength": edge.roadLength});	//добавляем грань
+                        sys.addEdge(sys.getNode(edge.sourceCity.id), sys.getNode(edge.targetCity.id), {"roadLength": edge.roadLength});	//добавляем грань
                     });
                 });
 
