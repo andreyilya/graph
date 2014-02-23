@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:META-INF/applicationContext.xml"})
+@Ignore
 public class CityDaoImplTest {
     @Autowired
     private CityRepository cityRepository;

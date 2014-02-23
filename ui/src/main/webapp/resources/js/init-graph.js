@@ -17,6 +17,10 @@
                 //действия при перересовке
                 ctx.fillStyle = "white";	//белым цветом
                 ctx.fillRect(0, 0, canvas.width, canvas.height); //закрашиваем всю область
+                if(particleSystem.parameters().friction<1){
+
+                    particleSystem.parameters({friction: particleSystem.parameters().friction + 0.0001}); // гравитация вкл
+                }
 
                 var nodeBoxes = {};
                 particleSystem.eachNode(	//теперь каждую вершину
@@ -129,11 +133,13 @@
 //
                 function (data) {
                     $.each(data.nodes, function (i, node) {
+                        //TODO: migrate to id
                         sys.addNode(node.name);	//добавляем вершину
                     });
 
                     $.each(data.edges, function (i, edge) {
-                        sys.addEdge(sys.getNode(edge.src), sys.getNode(edge.dest));	//добавляем грань
+                        //TODO: migrate to id
+                        sys.addEdge(sys.getNode(edge.sourceCity.name), sys.getNode(edge.targetCity.name));	//добавляем грань
                     });
                 });
 

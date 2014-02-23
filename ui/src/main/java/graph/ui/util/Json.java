@@ -23,6 +23,6 @@ public final class Json {
         headers.set(CONTENT_TYPE, APPLICATION_JSON);
         Gson gson = new Gson();
         String json = gson.toJson(o);
-        return new ResponseEntity<String>(json, headers, HttpStatus.CREATED);
+        return new ResponseEntity<>(json, headers, HttpStatus.CREATED);
     }
 }

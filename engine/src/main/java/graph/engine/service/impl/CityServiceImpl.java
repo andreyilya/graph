@@ -24,10 +24,10 @@ public class CityServiceImpl implements CityService {
 		city1.setName("city1");
 
 		City city2 = new City();
-		city1.setName("city2");
+		city2.setName("city2");
 
 		City city3 = new City();
-		city1.setName("city3");
+		city3.setName("city3");
 		CityGraph cityGraph = new CityGraph();
 
 		cityGraph.addNode(city1);
@@ -35,14 +35,18 @@ public class CityServiceImpl implements CityService {
 		cityGraph.addNode(city3);
 
 		Road road1 = new Road();
+		road1.setLenght(1L);
 		road1.setSourceCity(city1);
 		road1.setTargetCity(city2);
 
 		Road road2 = new Road();
+		road2.setLenght(1L);
+
 		road2.setSourceCity(city2);
 		road2.setTargetCity(city3);
 
 		Road road3 = new Road();
+		road3.setLenght(1L);
 		road3.setSourceCity(city3);
 		road3.setTargetCity(city1);
 
