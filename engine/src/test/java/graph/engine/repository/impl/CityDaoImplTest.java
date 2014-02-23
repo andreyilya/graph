@@ -34,8 +34,8 @@ public class CityDaoImplTest {
         cityLeft.setName("cityLeft");
         RoadEntity roadEntity = new RoadEntity();
         roadEntity.setLenght(1L);
-        roadEntity.setLeftCity(cityLeft);
-        roadEntity.setRightCity(cityRight);
+        roadEntity.setSourceCity(cityLeft);
+        roadEntity.setTargetCity(cityRight);
         roadEntity.setDirection(Direction.BOTH);
         cityRight.setRoads(Arrays.asList(roadEntity));
         cityRepository.save(cityRight);
