@@ -23,8 +23,12 @@ public class RoadConverter extends AbstractConverter<Road, RoadEntity> {
         road.setRoadLength(roadEntity.getLenght());
         road.setQuantity(roadEntity.getQuantity());
         road.setDirection(roadEntity.getDirection());
-        road.setSourceCity(roadEntity.getSourceCity().getId());
-        road.setTargetCity(roadEntity.getTargetCity().getId());
+        if (roadEntity.getSourceCity() != null) {
+            road.setSourceCity(roadEntity.getSourceCity().getId());
+        }
+        if (roadEntity.getTargetCity() != null) {
+            road.setTargetCity(roadEntity.getTargetCity().getId());
+        }
 
         return road;
     }

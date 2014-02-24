@@ -4,6 +4,7 @@ import graph.engine.converter.GraphConverter;
 import graph.engine.dto.City;
 import graph.engine.dto.CityGraph;
 import graph.engine.dto.Road;
+import graph.engine.model.CityEntity;
 import graph.engine.repository.api.CityRepository;
 import graph.engine.service.api.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +28,9 @@ public class CityServiceImpl implements CityService {
     @Transactional
     public CityGraph queryGraph(City targetPoint, int recursionDepth) {
         targetPoint.setId("32e20ba2-91fc-4945-a5c9-17db3eaf4975");
-        //  CityEntity cityEntity = cityRepository.findOne(targetPoint.getId());
-        // return graphConverter.disassemble(cityEntity, recursionDepth);
-        return getStaticCityGraph();
+        CityEntity cityEntity = cityRepository.findOne(targetPoint.getId());
+        return graphConverter.disassemble(cityEntity, recursionDepth);
+        // return getStaticCityGraph();
     }
 
     // CHECKSTYLE:OFF
