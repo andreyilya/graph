@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * Date: 24.02.14
  */
 @Component
-public class CityConverter extends AbstractConverter<City,CityEntity>{
+public class CityConverter extends AbstractConverter<City, CityEntity> {
     @Override
     public CityEntity assemble(City city) {
         return null;

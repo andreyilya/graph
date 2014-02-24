@@ -44,9 +44,8 @@ public class CityDaoImplTest {
 
     @Test
     @Transactional
-    @Ignore(value = "uncorrect id")
     public void testQueryGraph() {
-        CityEntity cityEntity = cityRepository.findOne("6185c287-ad09-455c-a621-a824664097bf");
+        CityEntity cityEntity = cityRepository.findOne("32e20ba2-91fc-4945-a5c9-17db3eaf4975");
         Assert.assertNotNull(cityEntity);
     }
 

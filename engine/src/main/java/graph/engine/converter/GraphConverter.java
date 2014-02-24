@@ -2,6 +2,8 @@ package graph.engine.converter;
 
 import graph.engine.dto.CityGraph;
 import graph.engine.model.CityEntity;
+import graph.engine.model.RoadEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,13 +12,26 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class GraphConverter {
+    @Autowired
+    private CityConverter cityConverter;
+
+    @Autowired
+    private RoadConverter roadConverter;
+
+
     public CityGraph disassemble(CityEntity cityEntity, int recursionDepth) {
         CityGraph cityGraph = new CityGraph();
-        return updateGraph(cityGraph,cityEntity,recursionDepth);
+        return updateGraph(cityGraph, cityEntity, recursionDepth);
     }
 
     private CityGraph updateGraph(CityGraph cityGraph, CityEntity cityEntity, int recursionDepth) {
-        //recursion here
+        if (recursionDepth > 0) {
+            cityGraph.addNode(cityConverter.disassemble(cityEntity));
+            cityGraph.addEdges(roadConverter.disassembleList(cityEntity.getRoads()));
+            for (RoadEntity roadEntity : cityEntity.getRoads()) {
+                updateGraph(cityGraph, roadEntity.getTargetCity(), recursionDepth - 1);
+            }
+        }
         return cityGraph;
     }
 }

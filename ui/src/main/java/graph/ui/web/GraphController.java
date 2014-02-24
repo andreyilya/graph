@@ -20,19 +20,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class GraphController {
 
-	@Autowired
-	private CityService cityService;
+    @Autowired
+    private CityService cityService;
 
-	@RequestMapping(Routes.GRAPH_PAGE)
-	public String getGraphPage(Map<String, Object> map) {
-		return Routes.GRAPH_PAGE;
-	}
+    @RequestMapping(Routes.GRAPH_PAGE)
+    public String getGraphPage(Map<String, Object> map) {
+        return Routes.GRAPH_PAGE;
+    }
 
-	@RequestMapping(value = Routes.GRAPH_DATA)
-	public
-	@ResponseBody
-	ResponseEntity<String> getGrahpData() {
-		return Json.createJsonResponse(cityService.queryGraph(new City(), 0));
-	}
+    // CHECKSTYLE:OFF
+    @RequestMapping(value = Routes.GRAPH_DATA)
+    public
+    @ResponseBody
+    ResponseEntity<String> getGrahpData() {
+        // CHECKSTYLE:ON
+        return Json.createJsonResponse(cityService.queryGraph(new City(), 2));
+    }
 
 }

@@ -8,6 +8,7 @@ import graph.engine.repository.api.CityRepository;
 import graph.engine.service.api.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * User: a.radkov
@@ -23,12 +24,15 @@ public class CityServiceImpl implements CityService {
     private GraphConverter graphConverter;
 
     @Override
+    @Transactional
     public CityGraph queryGraph(City targetPoint, int recursionDepth) {
-//        CityEntity cityEntity = cityRepository.findOne(targetPoint.getId());
-        //  return graphConverter.disassemble(cityEntity, recursionDepth);
+        targetPoint.setId("32e20ba2-91fc-4945-a5c9-17db3eaf4975");
+        //  CityEntity cityEntity = cityRepository.findOne(targetPoint.getId());
+        // return graphConverter.disassemble(cityEntity, recursionDepth);
         return getStaticCityGraph();
     }
 
+    // CHECKSTYLE:OFF
     private CityGraph getStaticCityGraph() {
         City city1 = new City();
         city1.setName("city1");
