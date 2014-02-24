@@ -11,7 +11,7 @@ import org.hibernate.annotations.GenericGenerator;
  * Date: 20.02.14
  */
 @MappedSuperclass
-public abstract class Identifiable {
+public abstract class IdentifiableEntity {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")

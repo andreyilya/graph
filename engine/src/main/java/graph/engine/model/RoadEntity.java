@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
  * Date: 20.02.14
  */
 @Entity
-public class RoadEntity extends Identifiable {
+public class RoadEntity extends IdentifiableEntity {
 
     @Column
     private Long lenght;

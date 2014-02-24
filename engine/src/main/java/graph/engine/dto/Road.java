@@ -12,6 +12,7 @@ public class Road extends Identifiable {
 
     private String quantity;
 
+    //todo: migrate ti id only
     private City sourceCity;
 
     private City targetCity;

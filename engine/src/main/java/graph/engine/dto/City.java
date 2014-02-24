@@ -12,6 +12,7 @@ public class City extends Identifiable {
 
     private Integer population;
 
+    //TODO: think if nessesary
     private List<Road> roads;
 
     public String getName() {

@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
  * Date: 20.02.14
  */
 @Entity
-public class CityEntity extends Identifiable {
+public class CityEntity extends IdentifiableEntity {
 
     @Column
     private String name;
