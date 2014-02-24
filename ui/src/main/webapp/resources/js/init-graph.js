@@ -140,7 +140,7 @@
                     });
 
                     $.each(data.edges, function (i, edge) {
-                        sys.addEdge(sys.getNode(edge.sourceCity.id), sys.getNode(edge.targetCity.id), {"roadLength": edge.roadLength});	//добавляем грань
+                        sys.addEdge(sys.getNode(edge.sourceCity), sys.getNode(edge.targetCity), {"roadLength": edge.roadLength});	//добавляем грань
                     });
                 });
 

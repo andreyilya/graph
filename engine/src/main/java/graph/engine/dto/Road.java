@@ -12,10 +12,9 @@ public class Road extends Identifiable {
 
     private String quantity;
 
-    //todo: migrate ti id only
-    private City sourceCity;
+    private String sourceCity;
 
-    private City targetCity;
+    private String targetCity;
 
     private Direction direction;
 
@@ -43,19 +42,19 @@ public class Road extends Identifiable {
         this.direction = direction;
     }
 
-    public City getTargetCity() {
+    public String getTargetCity() {
         return targetCity;
     }
 
-    public void setTargetCity(City targetCity) {
+    public void setTargetCity(String targetCity) {
         this.targetCity = targetCity;
     }
 
-    public City getSourceCity() {
+    public String getSourceCity() {
         return sourceCity;
     }
 
-    public void setSourceCity(City sourceCity) {
+    public void setSourceCity(String sourceCity) {
         this.sourceCity = sourceCity;
     }
 }

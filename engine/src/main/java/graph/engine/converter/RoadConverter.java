@@ -2,7 +2,6 @@ package graph.engine.converter;
 
 import graph.engine.dto.Road;
 import graph.engine.model.RoadEntity;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,9 +10,6 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class RoadConverter extends AbstractConverter<Road, RoadEntity> {
-
-    @Autowired
-    private CityConverter cityConverter;
 
     @Override
     public RoadEntity assemble(Road road) {
@@ -27,8 +23,8 @@ public class RoadConverter extends AbstractConverter<Road, RoadEntity> {
         road.setRoadLength(roadEntity.getLenght());
         road.setQuantity(roadEntity.getQuantity());
         road.setDirection(roadEntity.getDirection());
-        road.setSourceCity(cityConverter.disassemble(roadEntity.getSourceCity()));
-        road.setTargetCity(cityConverter.disassemble(roadEntity.getTargetCity()));
+        road.setSourceCity(roadEntity.getSourceCity().getId());
+        road.setTargetCity(roadEntity.getTargetCity().getId());
 
         return road;
     }
