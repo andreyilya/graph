@@ -31,7 +31,7 @@
                         ctx.fillStyle = "black";	//цвет для шрифта
                         ctx.font = 'italic 13px sans-serif'; //шрифт
                         ctx.fillText(node.data.name, pt.x + 8, pt.y + 8); //пишем имя у каждой точки
-                        nodeBoxes[node.data.name] = [pt.x - w / 2, pt.y - w / 2, w, w];
+                        nodeBoxes[node.name] = [pt.x - w / 2, pt.y - w / 2, w, w];
                     });
 
                 particleSystem.eachEdge(	//отрисуем каждую грань

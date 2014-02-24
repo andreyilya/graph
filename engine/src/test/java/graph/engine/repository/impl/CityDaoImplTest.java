@@ -1,7 +1,7 @@
 package graph.engine.repository.impl;
 
-import graph.engine.model.CityEntity;
 import graph.engine.common.Direction;
+import graph.engine.model.CityEntity;
 import graph.engine.model.RoadEntity;
 import graph.engine.repository.api.CityRepository;
 import java.util.Arrays;

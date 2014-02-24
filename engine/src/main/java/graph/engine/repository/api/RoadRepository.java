@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * User: a.radkov
  * Date: 20.02.14
  */
-public interface RoadRepository extends JpaRepository<RoadEntity, String>, CityDao {
+public interface RoadRepository extends JpaRepository<RoadEntity, String> {
 }
