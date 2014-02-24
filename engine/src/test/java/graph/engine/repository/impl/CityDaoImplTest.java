@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:META-INF/applicationContext.xml"})
-@Ignore
+//@Ignore
 public class CityDaoImplTest {
     @Autowired
     private CityRepository cityRepository;
@@ -45,7 +45,7 @@ public class CityDaoImplTest {
     @Test
     @Transactional
     public void testQueryGraph() {
-        CityEntity cityEntity = cityRepository.findOne("32e20ba2-91fc-4945-a5c9-17db3eaf4975");
+        CityEntity cityEntity = cityRepository.findOne("7660bd91-86ad-4580-bf8c-24d1ad69c711");
         Assert.assertNotNull(cityEntity);
     }
 

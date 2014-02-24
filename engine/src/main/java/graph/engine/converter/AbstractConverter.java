@@ -13,7 +13,7 @@ public abstract class AbstractConverter<DTO, ENTITY> {
     public abstract DTO disassemble(ENTITY entity);
 
     public List<DTO> disassembleList(List<ENTITY> entities) {
-        List<DTO> dtos = new ArrayList<>();
+        List<DTO> dtos = new ArrayList<>(entities.size());
         for (ENTITY entity : entities) {
             dtos.add(disassemble(entity));
         }

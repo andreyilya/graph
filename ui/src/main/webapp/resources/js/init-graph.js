@@ -24,60 +24,59 @@
 
                 var nodeBoxes = {};
                 particleSystem.eachNode(	//теперь каждую вершину
-                        function (node, pt) {		//получаем вершину и точку где она
-                            var w = 10;			//ширина квадрата
-                            ctx.fillStyle = "orange";	//с его цветом понятно
-                            ctx.fillRect(pt.x - w / 2, pt.y - w / 2, w, w);	//рисуем
-                            ctx.fillStyle = "black";	//цвет для шрифта
-                            ctx.font = 'italic 13px sans-serif'; //шрифт
-                            ctx.fillText(node.name, pt.x + 8, pt.y + 8); //пишем имя у каждой точки
-                            nodeBoxes[node.name] = [pt.x - w / 2, pt.y - w / 2, w, w];
-                            //nodeBoxes[node.name] = [pt.x-w/2, pt.y-11, w, 22]
-                        });
+                    function (node, pt) {		//получаем вершину и точку где она
+                        var w = 10;			//ширина квадрата
+                        ctx.fillStyle = "orange";	//с его цветом понятно
+                        ctx.fillRect(pt.x - w / 2, pt.y - w / 2, w, w);	//рисуем
+                        ctx.fillStyle = "black";	//цвет для шрифта
+                        ctx.font = 'italic 13px sans-serif'; //шрифт
+                        ctx.fillText(node.data.name, pt.x + 8, pt.y + 8); //пишем имя у каждой точки
+                        nodeBoxes[node.data.name] = [pt.x - w / 2, pt.y - w / 2, w, w];
+                    });
 
                 particleSystem.eachEdge(	//отрисуем каждую грань
-                        function (edge, pt1, pt2) {	//будем работать с гранями и точками её начала и конца
-                            ctx.strokeStyle = "rgba(5,5,5, .333)";	//грани будут чёрным цветом с некой прозрачностью
-                            ctx.lineWidth = 1;	//толщиной в один пиксель
-                            ctx.beginPath();		//начинаем рисовать
-                            // find the start point
+                    function (edge, pt1, pt2) {	//будем работать с гранями и точками её начала и конца
+                        ctx.strokeStyle = "rgba(5,5,5, .333)";	//грани будут чёрным цветом с некой прозрачностью
+                        ctx.lineWidth = 1;	//толщиной в один пиксель
+                        ctx.beginPath();		//начинаем рисовать
+                        // find the start point
 
-                            var tail = intersect_line_box(pt1, pt2, nodeBoxes[edge.source.name]);
-                            var head = intersect_line_box(tail, pt2, nodeBoxes[edge.target.name]);
-                            ctx.moveTo(tail.x, tail.y); //от точки один
-                            ctx.lineTo(head.x, head.y); //до точки два
-                            ctx.stroke();
+                        var tail = intersect_line_box(pt1, pt2, nodeBoxes[edge.source.name]);
+                        var head = intersect_line_box(tail, pt2, nodeBoxes[edge.target.name]);
+                        ctx.moveTo(tail.x, tail.y); //от точки один
+                        ctx.lineTo(head.x, head.y); //до точки два
+                        ctx.stroke();
 
-                            ctx.fillStyle = "black";
-                            ctx.font = 'italic 11px sans-serif';
-                            ctx.fillText(edge.data.roadLength + " км", (pt1.x + pt2.x) / 2, (pt1.y + pt2.y) / 2);
+                        ctx.fillStyle = "black";
+                        ctx.font = 'italic 11px sans-serif';
+                        ctx.fillText(edge.data.roadLength + " км", (pt1.x + pt2.x) / 2, (pt1.y + pt2.y) / 2);
 
-                            // if (edge.data.directed){   //direction here
-                            var weight = edge.data.weight;
+                        // if (edge.data.directed){   //direction here
+                        var weight = edge.data.weight;
 
-                            ctx.save();
-                            // move to the head position of the edge we just drew
-                            var wt = !isNaN(weight) ? parseFloat(weight) : 1;
-                            var arrowLength = 8 + wt;
-                            var arrowWidth = 3 + wt;
-                            ctx.fillStyle = "#cccccc";
-                            ctx.translate(head.x, head.y);
-                            ctx.rotate(Math.atan2(head.y - tail.y, head.x - tail.x));
+                        ctx.save();
+                        // move to the head position of the edge we just drew
+                        var wt = !isNaN(weight) ? parseFloat(weight) : 1;
+                        var arrowLength = 8 + wt;
+                        var arrowWidth = 3 + wt;
+                        ctx.fillStyle = "#cccccc";
+                        ctx.translate(head.x, head.y);
+                        ctx.rotate(Math.atan2(head.y - tail.y, head.x - tail.x));
 
-                            // delete some of the edge that's already there (so the point isn't hidden)
-                            ctx.clearRect(-arrowLength / 2, -wt / 2, arrowLength / 2, wt)
+                        // delete some of the edge that's already there (so the point isn't hidden)
+                        ctx.clearRect(-arrowLength / 2, -wt / 2, arrowLength / 2, wt)
 
-                            // draw the chevron
-                            ctx.beginPath();
-                            ctx.moveTo(-arrowLength, arrowWidth);
-                            ctx.lineTo(0, 0);
-                            ctx.lineTo(-arrowLength, -arrowWidth);
-                            ctx.lineTo(-arrowLength * 0.8, -0);
-                            ctx.closePath();
-                            ctx.fill();
-                            ctx.restore();
+                        // draw the chevron
+                        ctx.beginPath();
+                        ctx.moveTo(-arrowLength, arrowWidth);
+                        ctx.lineTo(0, 0);
+                        ctx.lineTo(-arrowLength, -arrowWidth);
+                        ctx.lineTo(-arrowLength * 0.8, -0);
+                        ctx.closePath();
+                        ctx.fill();
+                        ctx.restore();
 //                              }
-                        });
+                    });
 
             },
 
@@ -126,23 +125,25 @@
 
     $(document).ready(function () {
         $("#viewport")
-                .attr('width', $(window).width())
-                .attr('height', $(window).height());
+            .attr('width', $(window).width())
+            .attr('height', $(window).height());
         sys = arbor.ParticleSystem(1000); // создаём систему
         sys.parameters({gravity: false, friction: 0.98}); // гравитация вкл
         sys.renderer = Renderer("#viewport"); //начинаем рисовать в выбраной области
 
         $.getJSON("graph-data",	//получаем с сервера файл с данными
 //
-                function (data) {
-                    $.each(data.nodes, function (i, node) {
-                        sys.addNode(node.id);	//добавляем вершину
-                    });
-
-                    $.each(data.edges, function (i, edge) {
-                        sys.addEdge(sys.getNode(edge.sourceCity), sys.getNode(edge.targetCity), {"roadLength": edge.roadLength});	//добавляем грань
-                    });
+            function (data) {
+                $.each(data.nodes, function (i, node) {
+                    sys.addNode(node.id, {"name": node.name});	//добавляем вершину
                 });
+
+                $.each(data.edges, function (i, edge) {
+                    if (edge.sourceCity != null && edge.targetCity != null) {
+                        sys.addEdge(sys.getNode(edge.sourceCity), sys.getNode(edge.targetCity), {"roadLength": edge.roadLength});	//добавляем грань
+                    }
+                });
+            });
 
     });
 
@@ -159,8 +160,8 @@
 
     var intersect_line_box = function (p1, p2, boxTuple) {
         var p3 = {x: boxTuple[0], y: boxTuple[1]},
-                w = boxTuple[2],
-                h = boxTuple[3]
+            w = boxTuple[2],
+            h = boxTuple[3]
 
         var tl = {x: p3.x, y: p3.y};
         var tr = {x: p3.x + w, y: p3.y};
@@ -168,10 +169,10 @@
         var br = {x: p3.x + w, y: p3.y + h};
 
         return intersect_line_line(p1, p2, tl, tr) ||
-                intersect_line_line(p1, p2, tr, br) ||
-                intersect_line_line(p1, p2, br, bl) ||
-                intersect_line_line(p1, p2, bl, tl) ||
-                false
+            intersect_line_line(p1, p2, tr, br) ||
+            intersect_line_line(p1, p2, br, bl) ||
+            intersect_line_line(p1, p2, bl, tl) ||
+            false
     };
 
 })(this.jQuery);

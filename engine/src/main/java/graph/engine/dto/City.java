@@ -1,7 +1,5 @@
 package graph.engine.dto;
 
-import java.util.List;
-
 /**
  * User: a.radkov
  * Date: 20.02.14
@@ -11,9 +9,6 @@ public class City extends Identifiable {
     private String name;
 
     private Integer population;
-
-    //TODO: think if nessesary
-    private List<Road> roads;
 
     public String getName() {
         return name;
@@ -31,11 +26,4 @@ public class City extends Identifiable {
         this.population = population;
     }
 
-    public List<Road> getRoads() {
-        return roads;
-    }
-
-    public void setRoads(List<Road> roads) {
-        this.roads = roads;
-    }
 }
