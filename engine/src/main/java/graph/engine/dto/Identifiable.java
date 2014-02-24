@@ -19,7 +19,7 @@ public abstract class Identifiable {
 
     @Override
     public boolean equals(Object obj) {
-        if (StringUtils.isBlank(this.getId()) && !(obj instanceof Identifiable)) {
+        if (StringUtils.isBlank(this.getId()) || !(obj instanceof Identifiable)) {
             return false;
         } else {
             return this.id.equals(((Identifiable) obj).getId());
