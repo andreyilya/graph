@@ -125,7 +125,7 @@
 
     $(document).ready(function () {
         $("#viewport")
-            .attr('width', $(window).width())
+            .attr('width', $("#graphContent").width())
             .attr('height', $(window).height());
         sys = arbor.ParticleSystem(1000); // создаём систему
         sys.parameters({gravity: false, friction: 0.98}); // гравитация вкл

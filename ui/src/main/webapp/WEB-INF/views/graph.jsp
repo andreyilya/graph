@@ -9,6 +9,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf8">
     <meta http-equiv="Content-Script-Type" content="text/javascript; charset=utf-8">
+    <%--//TODO: absolute path--%>
+    <link rel="stylesheet" type="text/css" href="resources/css/style.css">
     <title>Граф</title>
 </head>
 <body>
@@ -18,7 +20,12 @@
     <h1>Граф</h1>
 
     <div class="wrapper">
-        <canvas id="viewport" ></canvas>
+        <div id="leftSidebar">
+
+        </div>
+        <div id="graphContent">
+            <canvas id="viewport"></canvas>
+        </div>
     </div>
 </div>
 

@@ -1,0 +1,10 @@
+#leftSidebar {
+    float: left;
+    border: solid 1px #cccccc;
+    width: 300px;
+    min-height: 300px;
+}
+
+#graphContent {
+    margin-left: 330px;
+}
