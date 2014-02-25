@@ -10,8 +10,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf8">
     <meta http-equiv="Content-Script-Type" content="text/javascript; charset=utf-8">
-    <%--//TODO: absolute path--%>
-    <link rel="stylesheet" type="text/css" href="resources/css/style.css">
+    <%--//TODO: to variable path--%>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/resources/css/style.css">
     <title>Граф</title>
 </head>
 <body>
@@ -34,9 +34,9 @@
     </div>
 </div>
 
-<script src="resources/js/jquery.min.js" type="text/javascript"></script>
-<script src="resources/js/arbor.js" type="text/javascript"></script>
-<script src="resources/js/arbor-tween.js" type="text/javascript"></script>
-<script src="resources/js/init-graph.js" type="text/javascript"></script>
+<script src="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/resources/js/jquery.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/resources/js/arbor.js" type="text/javascript"></script>
+<script src="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/resources/js/arbor-tween.js" type="text/javascript"></script>
+<script src="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/resources/js/init-graph.js" type="text/javascript"></script>
 </body>
 </html>

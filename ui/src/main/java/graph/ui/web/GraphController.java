@@ -32,7 +32,7 @@ public class GraphController {
     @RequestMapping(value = Routes.GRAPH_DATA)
     public
     @ResponseBody
-    ResponseEntity<String> getGrahpData(@PathVariable(Routes.TARGET_ID) String targetId, @PathVariable(Routes.RECURSION_DEPTH) int recursionDepth) {
+    ResponseEntity<String> getGraphData(@PathVariable(Routes.TARGET_ID) String targetId, @PathVariable(Routes.RECURSION_DEPTH) int recursionDepth) {
         // CHECKSTYLE:ON
         return Json.createJsonResponse(cityService.queryGraph(targetId, recursionDepth));
     }
