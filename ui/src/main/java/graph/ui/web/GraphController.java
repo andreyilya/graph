@@ -1,6 +1,5 @@
 package graph.ui.web;
 
-import graph.engine.dto.City;
 import graph.engine.service.api.CityService;
 import graph.ui.util.Json;
 import graph.ui.util.Routes;
@@ -8,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -32,9 +32,9 @@ public class GraphController {
     @RequestMapping(value = Routes.GRAPH_DATA)
     public
     @ResponseBody
-    ResponseEntity<String> getGrahpData() {
+    ResponseEntity<String> getGrahpData(@PathVariable(Routes.TARGET_ID) String targetId, @PathVariable(Routes.RECURSION_DEPTH) int recursionDepth) {
         // CHECKSTYLE:ON
-        return Json.createJsonResponse(cityService.queryGraph("007705a1-4a9b-4d0f-8453-a0b30a41906b", 3));
+        return Json.createJsonResponse(cityService.queryGraph(targetId, recursionDepth));
     }
 
 }

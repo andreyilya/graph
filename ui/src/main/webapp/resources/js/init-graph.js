@@ -131,7 +131,7 @@
         sys.parameters({gravity: false, friction: 0.98}); // гравитация вкл
         sys.renderer = Renderer("#viewport"); //начинаем рисовать в выбраной области
 
-        $.getJSON("graph-data",	//получаем с сервера файл с данными
+        $.getJSON("graph-data/007705a1-4a9b-4d0f-8453-a0b30a41906b/3",	//получаем с сервера файл с данными
 //
             function (data) {
                 $.each(data.nodes, function (i, node) {
