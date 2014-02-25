@@ -34,7 +34,7 @@ public class GraphController {
     @ResponseBody
     ResponseEntity<String> getGrahpData() {
         // CHECKSTYLE:ON
-        return Json.createJsonResponse(cityService.queryGraph(new City(), 2));
+        return Json.createJsonResponse(cityService.queryGraph(new City(), 3));
     }
 
 }

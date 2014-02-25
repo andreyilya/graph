@@ -1,11 +1,10 @@
 package graph.engine.model;
 
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 /**
  * User: a.radkov
@@ -20,7 +19,7 @@ public class CityEntity extends IdentifiableEntity {
     @Column
     private Integer population;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<RoadEntity> roads;
 
     public String getName() {

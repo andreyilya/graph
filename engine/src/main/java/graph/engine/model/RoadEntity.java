@@ -1,7 +1,6 @@
 package graph.engine.model;
 
 import graph.engine.common.Direction;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -22,10 +21,10 @@ public class RoadEntity extends IdentifiableEntity {
     @Column
     private String quantity;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY)
     private CityEntity sourceCity;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY)
     private CityEntity targetCity;
 
     @Enumerated(EnumType.STRING)
