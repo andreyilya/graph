@@ -86,6 +86,7 @@
                     clicked: function (e) {	//нажали
                         var pos = $(canvas).offset();	//получаем позицию canvas
                         _mouseP = arbor.Point(e.pageX - pos.left, e.pageY - pos.top); //и позицию нажатия кнопки относительно canvas
+                        //TODO: only on node not nearest
                         dragged = particleSystem.nearest(_mouseP);	//определяем ближайшую вершину к нажатию
                         if (dragged && dragged.node !== null) {
                             dragged.node.fixed = true;	//фиксируем её
@@ -106,8 +107,12 @@
                         return false;
                     },
                     dropped: function (e) {	//отпустили
-                        if (dragged === null || dragged.node === undefined) return;	//если не перемещали, то уходим
-                        if (dragged.node !== null) dragged.node.fixed = false;	//если перемещали - отпускаем
+                        if (dragged === null || dragged.node === undefined) {
+                            return;
+                        }	//если не перемещали, то уходим
+                        if (dragged.node !== null) {
+                            dragged.node.fixed = false;
+                        }	//если перемещали - отпускаем
                         dragged = null; //очищаем
                         $(canvas).unbind('mousemove', handler.dragged); //перестаём слушать события
                         $(window).unbind('mouseup', handler.dropped);
@@ -133,7 +138,6 @@
             sys.renderer = Renderer("#viewport"); //начинаем рисовать в выбраной области
 
             $.getJSON("graph-data/" + $("#target").val() + "/" + $("#depth").val(),	//получаем с сервера файл с данными
-//
                 function (data) {
                     $.each(data.nodes, function (i, node) {
                         sys.addNode(node.id, {"name": node.name});	//добавляем вершину
