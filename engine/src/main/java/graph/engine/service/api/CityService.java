@@ -8,5 +8,5 @@ import graph.engine.dto.CityGraph;
  * Date: 21.02.14
  */
 public interface CityService extends CrudService<City> {
-    CityGraph queryGraph(City targetPoint, int recursionDepth);
+    CityGraph queryGraph(String targetPoint, int recursionDepth);
 }

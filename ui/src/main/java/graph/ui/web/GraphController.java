@@ -34,7 +34,7 @@ public class GraphController {
     @ResponseBody
     ResponseEntity<String> getGrahpData() {
         // CHECKSTYLE:ON
-        return Json.createJsonResponse(cityService.queryGraph(new City(), 3));
+        return Json.createJsonResponse(cityService.queryGraph("007705a1-4a9b-4d0f-8453-a0b30a41906b", 3));
     }
 
 }

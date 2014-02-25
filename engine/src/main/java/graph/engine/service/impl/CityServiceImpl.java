@@ -26,9 +26,8 @@ public class CityServiceImpl implements CityService {
 
     @Override
     @Transactional
-    public CityGraph queryGraph(City targetPoint, int recursionDepth) {
-        targetPoint.setId("007705a1-4a9b-4d0f-8453-a0b30a41906b");
-        CityEntity cityEntity = cityRepository.findOne(targetPoint.getId());
+    public CityGraph queryGraph(String targetPoint, int recursionDepth) {
+        CityEntity cityEntity = cityRepository.findOne(targetPoint);
         return graphConverter.disassemble(cityEntity, recursionDepth);
         // return getStaticCityGraph();
     }
