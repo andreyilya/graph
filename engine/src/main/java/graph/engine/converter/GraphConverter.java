@@ -37,6 +37,7 @@ public class GraphConverter {
                 }
             }
         }
+        //TODO: clear edges without any city
         return cityGraph;
     }
 }
