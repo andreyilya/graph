@@ -124,26 +124,30 @@
     };
 
     $(document).ready(function () {
-        $("#viewport")
-            .attr('width', $("#graphContent").width())
-            .attr('height', $(window).height());
-        sys = arbor.ParticleSystem(1000); // создаём систему
-        sys.parameters({gravity: false, friction: 0.98}); // гравитация вкл
-        sys.renderer = Renderer("#viewport"); //начинаем рисовать в выбраной области
+        $("#queryGraphButton").bind('click', function () {
+            $("#viewport")
+                .attr('width', $("#graphContent").width())
+                .attr('height', $(window).height());
+            sys = arbor.ParticleSystem(1000); // создаём систему
+            sys.parameters({gravity: false, friction: 0.98}); // гравитация вкл
+            sys.renderer = Renderer("#viewport"); //начинаем рисовать в выбраной области
 
-        $.getJSON("graph-data/007705a1-4a9b-4d0f-8453-a0b30a41906b/3",	//получаем с сервера файл с данными
+            $.getJSON("graph-data/" + $("#target").val() + "/" + $("#depth").val(),	//получаем с сервера файл с данными
 //
-            function (data) {
-                $.each(data.nodes, function (i, node) {
-                    sys.addNode(node.id, {"name": node.name});	//добавляем вершину
+                function (data) {
+                    $.each(data.nodes, function (i, node) {
+                        sys.addNode(node.id, {"name": node.name});	//добавляем вершину
+                    });
+
+                    $.each(data.edges, function (i, edge) {
+                        if (edge.sourceCity != null && edge.targetCity != null) {
+                            sys.addEdge(sys.getNode(edge.sourceCity), sys.getNode(edge.targetCity), {"roadLength": edge.roadLength});	//добавляем грань
+                        }
+                    });
                 });
 
-                $.each(data.edges, function (i, edge) {
-                    if (edge.sourceCity != null && edge.targetCity != null) {
-                        sys.addEdge(sys.getNode(edge.sourceCity), sys.getNode(edge.targetCity), {"roadLength": edge.roadLength});	//добавляем грань
-                    }
-                });
-            });
+        });
+
 
     });
 
