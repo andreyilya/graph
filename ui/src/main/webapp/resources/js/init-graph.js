@@ -84,18 +84,20 @@
                 var dragged = null;			//вершина которую перемещают
                 var handler = {
                     clicked: function (e) {	//нажали
-                        var pos = $(canvas).offset();	//получаем позицию canvas
-                        _mouseP = arbor.Point(e.pageX - pos.left, e.pageY - pos.top); //и позицию нажатия кнопки относительно canvas
-                        //TODO: only on node not nearest
-                        dragged = particleSystem.nearest(_mouseP);	//определяем ближайшую вершину к нажатию
-                        if (dragged && dragged.node !== null) {
-                            dragged.node.fixed = true;	//фиксируем её
+                        if (e.button == 0) {
+                            var pos = $(canvas).offset();	//получаем позицию canvas
+                            _mouseP = arbor.Point(e.pageX - pos.left, e.pageY - pos.top); //и позицию нажатия кнопки относительно canvas
+                            //TODO: only on node not nearest
+                            dragged = particleSystem.nearest(_mouseP);	//определяем ближайшую вершину к нажатию
+                            if (dragged && dragged.node !== null) {
+                                dragged.node.fixed = true;	//фиксируем её
+                            }
+                            //TODO: mouse handling here
+                            var id = dragged.node.name;
+                            // alert('Node selected: ' + id);
+                            $(canvas).bind('mousemove', handler.dragged);	//слушаем события перемещения мыши
+                            $(window).bind('mouseup', handler.dropped);		//и отпускания кнопки
                         }
-                        //TODO: mouse handling here
-                        var id=dragged.node.name;
-                       // alert('Node selected: ' + id);
-                        $(canvas).bind('mousemove', handler.dragged);	//слушаем события перемещения мыши
-                        $(window).bind('mouseup', handler.dropped);		//и отпускания кнопки
                         return false;
                     },
                     dragged: function (e) {	//перетаскиваем вершину
