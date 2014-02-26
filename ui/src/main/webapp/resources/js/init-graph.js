@@ -89,14 +89,16 @@
                             _mouseP = arbor.Point(e.pageX - pos.left, e.pageY - pos.top); //и позицию нажатия кнопки относительно canvas
                             //TODO: only on node not nearest
                             dragged = particleSystem.nearest(_mouseP);	//определяем ближайшую вершину к нажатию
-                            if (dragged && dragged.node !== null) {
-                                dragged.node.fixed = true;	//фиксируем её
+                            if (dragged.distance < 10) {
+                                if (dragged && dragged.node !== null) {
+                                    dragged.node.fixed = true;	//фиксируем её
+                                }
+                                //TODO: mouse handling here
+                                var id = dragged.node.name;
+                                // alert('Node selected: ' + id);
+                                $(canvas).bind('mousemove', handler.dragged);	//слушаем события перемещения мыши
+                                $(window).bind('mouseup', handler.dropped);		//и отпускания кнопки
                             }
-                            //TODO: mouse handling here
-                            var id = dragged.node.name;
-                            // alert('Node selected: ' + id);
-                            $(canvas).bind('mousemove', handler.dragged);	//слушаем события перемещения мыши
-                            $(window).bind('mouseup', handler.dropped);		//и отпускания кнопки
                         }
                         return false;
                     },
@@ -151,7 +153,9 @@
 
                     $.each(data.edges, function (i, edge) {
                         if (edge.sourceCity != null && edge.targetCity != null) {
-                            sys.addEdge(sys.getNode(edge.sourceCity), sys.getNode(edge.targetCity), {"roadLength": edge.roadLength});	//добавляем грань
+                            if (sys.getNode(edge.sourceCity) != null && sys.getNode(edge.targetCity) != null) {
+                                sys.addEdge(sys.getNode(edge.sourceCity), sys.getNode(edge.targetCity), {"roadLength": edge.roadLength});	//добавляем грань
+                            }
                         }
                     });
                 });
