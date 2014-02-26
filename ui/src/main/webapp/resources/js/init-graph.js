@@ -91,6 +91,9 @@
                         if (dragged && dragged.node !== null) {
                             dragged.node.fixed = true;	//фиксируем её
                         }
+                        //TODO: mouse handling here
+                        var id=dragged.node.name;
+                       // alert('Node selected: ' + id);
                         $(canvas).bind('mousemove', handler.dragged);	//слушаем события перемещения мыши
                         $(window).bind('mouseup', handler.dropped);		//и отпускания кнопки
                         return false;
@@ -119,6 +122,7 @@
                         _mouseP = null;
                         return false;
                     }
+
                 };
                 // слушаем события нажатия мыши
                 $(canvas).mousedown(handler.clicked);
