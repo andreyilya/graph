@@ -104,6 +104,33 @@
                         } else if (e.button == 2) {
                             if (dragged.distance < w) {
                                //context menu here
+                            $(document).contextMenu('myMenu1', {
+                                    bindings: {
+                                        'open': function(t) {
+                                            alert('Trigger was '+t.id+'\nAction was Open');
+                                        },
+                                        'email': function(t) {
+                                            alert('Trigger was '+t.id+'\nAction was Email');
+                                        },
+
+                                        'save': function(t) {
+                                            alert('Trigger was '+t.id+'\nAction was Save');
+                                        },
+
+                                        'delete': function(t) {
+                                            alert('Trigger was '+t.id+'\nAction was Delete');
+                                        }
+
+                                    } , onShowMenu: function(e, menu) {
+                                    if (dragged.distance < w)  {
+                                        $('#open', menu).remove();
+                                }
+
+                                    return menu;
+
+                                }
+
+                                });
                             }
                         }
                         return false;

@@ -33,18 +33,12 @@
         </div>
     </div>
 </div>
-<div class="contextMenu" id="myMenu1">
-
+<div class="contextMenu" id="myMenu1" >
     <ul>
-
         <li id="open"><img src="folder.png" /> Open</li>
-
         <li id="email"><img src="email.png" /> Email</li>
-
         <li id="save"><img src="disk.png" /> Save</li>
-
         <li id="close"><img src="cross.png" /> Close</li>
-
     </ul>
 
 </div>
