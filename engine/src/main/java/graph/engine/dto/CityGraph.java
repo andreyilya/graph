@@ -1,5 +1,6 @@
 package graph.engine.dto;
 
+import graph.engine.model.CityEntity;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,14 +11,11 @@ import java.util.List;
  * Time: 8:55
  */
 public class CityGraph {
-    private List<City> nodes;
+    private List<City> nodes = new ArrayList<>();
 
-    private List<Road> edges;
+    private List<Road> edges = new ArrayList<>();
 
     public CityGraph addNode(City city) {
-        if (nodes == null) {
-            nodes = new ArrayList<>();
-        }
         if (!nodes.contains(city)) {
             nodes.add(city);
         }
@@ -25,9 +23,6 @@ public class CityGraph {
     }
 
     public CityGraph addEdge(Road road) {
-        if (edges == null) {
-            edges = new ArrayList<>();
-        }
         if (!edges.contains(road)) {
             edges.add(road);
         }
@@ -35,9 +30,6 @@ public class CityGraph {
     }
 
     public CityGraph addEdges(List<Road> roads) {
-        if (edges == null) {
-            edges = new ArrayList<>();
-        }
         for (Road road : roads) {
             if (!edges.contains(road)) {
                 edges.add(road);
@@ -46,19 +38,17 @@ public class CityGraph {
         return this;
     }
 
-    public void setNodes(List<City> nodes) {
-        this.nodes = nodes;
-    }
-
-    public void setEdges(List<Road> edges) {
-        this.edges = edges;
-    }
-
     public List<City> getNodes() {
         return nodes;
     }
 
     public List<Road> getEdges() {
         return edges;
+    }
+
+    public boolean containsNode(CityEntity targetCity) {
+        City city = new City();
+        city.setId(targetCity.getId());
+        return nodes.contains(city);
     }
 }

@@ -29,10 +29,10 @@ public class GraphConverter {
             cityGraph.addNode(cityConverter.disassemble(cityEntity));
             cityGraph.addEdges(roadConverter.disassembleList(cityEntity.getRoads()));
             for (RoadEntity roadEntity : cityEntity.getRoads()) {
-                if (roadEntity.getTargetCity() != null) {
+                if (roadEntity.getTargetCity() != null && !cityGraph.containsNode(roadEntity.getTargetCity())) {
                     updateGraph(cityGraph, roadEntity.getTargetCity(), recursionDepth - 1);
                 }
-                if (roadEntity.getSourceCity() != null) {
+                if (roadEntity.getSourceCity() != null && !cityGraph.containsNode(roadEntity.getSourceCity())) {
                     updateGraph(cityGraph, roadEntity.getSourceCity(), recursionDepth - 1);
                 }
             }

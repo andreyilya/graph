@@ -3,6 +3,7 @@
         var canvas = $(canvas).get(0);
         var ctx = canvas.getContext("2d");
         var particleSystem;
+        var w = 10;			//ширина квадрата
 
         var that = {
             init: function (system) {
@@ -25,7 +26,7 @@
                 var nodeBoxes = {};
                 particleSystem.eachNode(	//теперь каждую вершину
                     function (node, pt) {		//получаем вершину и точку где она
-                        var w = 10;			//ширина квадрата
+
                         ctx.fillStyle = "orange";	//с его цветом понятно
                         ctx.fillRect(pt.x - w / 2, pt.y - w / 2, w, w);	//рисуем
                         ctx.fillStyle = "black";	//цвет для шрифта
@@ -89,7 +90,7 @@
                             _mouseP = arbor.Point(e.pageX - pos.left, e.pageY - pos.top); //и позицию нажатия кнопки относительно canvas
                             //TODO: only on node not nearest
                             dragged = particleSystem.nearest(_mouseP);	//определяем ближайшую вершину к нажатию
-                            if (dragged.distance < 10) {
+                            if (dragged.distance < w) {
                                 if (dragged && dragged.node !== null) {
                                     dragged.node.fixed = true;	//фиксируем её
                                 }
@@ -161,7 +162,6 @@
                 });
 
         });
-
 
     });
 
