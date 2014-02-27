@@ -85,11 +85,12 @@
                 var dragged = null;			//вершина которую перемещают
                 var handler = {
                     clicked: function (e) {	//нажали
+                        var pos = $(canvas).offset();	//получаем позицию canvas
+                        _mouseP = arbor.Point(e.pageX - pos.left, e.pageY - pos.top); //и позицию нажатия кнопки относительно canvas
+                        //TODO: only on node not nearest
+                        dragged = particleSystem.nearest(_mouseP);	//определяем ближайшую вершину к нажатию
+
                         if (e.button == 0) {
-                            var pos = $(canvas).offset();	//получаем позицию canvas
-                            _mouseP = arbor.Point(e.pageX - pos.left, e.pageY - pos.top); //и позицию нажатия кнопки относительно canvas
-                            //TODO: only on node not nearest
-                            dragged = particleSystem.nearest(_mouseP);	//определяем ближайшую вершину к нажатию
                             if (dragged.distance < w) {
                                 if (dragged && dragged.node !== null) {
                                     dragged.node.fixed = true;	//фиксируем её
@@ -99,6 +100,10 @@
                                 // alert('Node selected: ' + id);
                                 $(canvas).bind('mousemove', handler.dragged);	//слушаем события перемещения мыши
                                 $(window).bind('mouseup', handler.dropped);		//и отпускания кнопки
+                            }
+                        } else if (e.button == 2) {
+                            if (dragged.distance < w) {
+                               //context menu here
                             }
                         }
                         return false;

@@ -33,10 +33,25 @@
         </div>
     </div>
 </div>
+<div class="contextMenu" id="myMenu1">
 
+    <ul>
+
+        <li id="open"><img src="folder.png" /> Open</li>
+
+        <li id="email"><img src="email.png" /> Email</li>
+
+        <li id="save"><img src="disk.png" /> Save</li>
+
+        <li id="close"><img src="cross.png" /> Close</li>
+
+    </ul>
+
+</div>
 <script src="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/resources/js/jquery.min.js" type="text/javascript"></script>
 <script src="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/resources/js/arbor.js" type="text/javascript"></script>
 <script src="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/resources/js/arbor-tween.js" type="text/javascript"></script>
+<script src="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/resources/js/contextmenu.js" type="text/javascript"></script>
 <script src="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/resources/js/init-graph.js" type="text/javascript"></script>
 </body>
 </html>
