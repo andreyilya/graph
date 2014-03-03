@@ -10,4 +10,6 @@ public interface CrudService<DTO> {
 
     DTO findOne(String id);
 
+    void delete(String id);
+
 }

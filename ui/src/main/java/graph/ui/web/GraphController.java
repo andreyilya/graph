@@ -50,4 +50,13 @@ public class GraphController {
         return Json.createJsonResponse(cityService.save(city));
     }
 
+     // CHECKSTYLE:OFF
+    @RequestMapping(value = Routes.DELETE_NODE)
+    public
+    @ResponseBody
+    void deleteNode(@PathVariable(Routes.TARGET_ID) String targetId) {
+        // CHECKSTYLE:ON
+        cityService.delete(targetId);
+    }
+
 }

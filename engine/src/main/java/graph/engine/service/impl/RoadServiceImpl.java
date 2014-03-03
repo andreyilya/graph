@@ -25,4 +25,9 @@ public class RoadServiceImpl implements RoadService {
     public Road findOne(String id) {
         return null;
     }
+
+    @Override
+    public void delete(String id) {
+        roadRepository.delete(id);
+    }
 }

@@ -104,4 +104,9 @@ public class CityServiceImpl implements CityService {
         return cityConverter.disassemble(cityRepository.findOne(id));
 
     }
+
+    @Override
+    public void delete(String id) {
+        cityRepository.delete(id);
+    }
 }

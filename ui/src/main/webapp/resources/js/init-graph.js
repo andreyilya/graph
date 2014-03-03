@@ -96,7 +96,8 @@
                                     $( "#dialog" ).dialog( "open" );
                                 },
                                 'deleteNode': function (t) {
-                                    alert('Trigger was ' + t.id + '\nAction was deleteNode');
+                                    $.post("delete-node/" + dragged.node.name ,function(){
+                                    });
                                 }
 
                             }, onShowMenu: function (e, menu) {
