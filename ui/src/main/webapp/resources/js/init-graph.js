@@ -83,6 +83,7 @@
 
             initMouseHandling: function () {	//события с мышью
                 var dragged = null;			//вершина которую перемещают
+                var relation = false;
                 var handler = {
                     clicked: function (e) {	//нажали
                         var pos = $(canvas).offset();	//получаем позицию canvas
@@ -93,10 +94,11 @@
                         $("canvas").contextMenu('contextMenu', {
                             bindings: {
                                 'createNode': function (t) {
-                                    $( "#dialog" ).dialog( "open" );
+                                    $("#dialog").dialog("open");
                                 },
                                 'deleteNode': function (t) {
-                                    $.post("delete-node/" + dragged.node.name ,function(){
+                                    $.post("delete-node/" + dragged.node.name, function () {
+                                        sys.pruneNode(dragged.node);
                                     });
                                 }
 
@@ -125,6 +127,8 @@
                         } else if (e.button == 2) {
                             if (dragged.distance < w) {
                                 //TODO  relations drag/drop
+                                relation = true;
+                                $(window).bind('mouseup', handler.dropped);
                             }
                         }
                         return false;
@@ -141,16 +145,32 @@
                         return false;
                     },
                     dropped: function (e) {	//отпустили
-                        if (dragged === null || dragged.node === undefined) {
-                            return;
-                        }	//если не перемещали, то уходим
-                        if (dragged.node !== null) {
-                            dragged.node.fixed = false;
-                        }	//если перемещали - отпускаем
-                        dragged = null; //очищаем
-                        $(canvas).unbind('mousemove', handler.dragged); //перестаём слушать события
-                        $(window).unbind('mouseup', handler.dropped);
-                        _mouseP = null;
+                        if (e.button == 0) {
+                            if (dragged === null || dragged.node === undefined) {
+                                return;
+                            }	//если не перемещали, то уходим
+                            if (dragged.node !== null) {
+                                dragged.node.fixed = false;
+                            }	//если перемещали - отпускаем
+                            dragged = null; //очищаем
+                            $(canvas).unbind('mousemove', handler.dragged); //перестаём слушать события
+                            $(window).unbind('mouseup', handler.dropped);
+                            _mouseP = null;
+                            return false;
+                        } else if (e.button == 2) {
+                            var pos2 = $(canvas).offset();	//получаем позицию canvas
+                            _mouseP2 = arbor.Point(e.pageX - pos2.left, e.pageY - pos2.top); //и позицию нажатия кнопки относительно canvas
+                            dropped = particleSystem.nearest(_mouseP2);	//определяем ближайшую вершину к нажатию
+
+                            if (dropped.distance < w) {
+                                //TODO  relations drag/drop
+                                sys.addEdge(dragged, dropped, {"roadLength": "1"});
+                            }
+                            relation = false;
+                            $(window).unbind('mouseup', handler.dropped);
+
+
+                        }
                         return false;
                     }
 
@@ -195,11 +215,10 @@
 
         $("#createCity").click({_mouseP: _mouseP}, function () {
 
-            $.post("add-node",$("#createCityForm").serialize(), function(data){
-                sys.addNode(data.id, {"name": data.name});
-                sys.getNode(data.id).p = particleSystem.fromScreen(_mouseP);
-                $( "#dialog" ).dialog( "close" );
-            }, 'json') ;
+            $.post("add-node", $("#createCityForm").serialize(), function (data) {
+                sys.addNode(data.id, {"name": data.name}).p = particleSystem.fromScreen(_mouseP);
+                $("#dialog").dialog("close");
+            }, 'json');
 
         });
 
