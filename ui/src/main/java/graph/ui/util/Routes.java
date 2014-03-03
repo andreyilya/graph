@@ -19,7 +19,10 @@ public final class Routes {
     public static final String TARGET_ID = "targetId";
     public static final String RECURSION_DEPTH = "recursionDepth";
     public static final String CITY = "city";
+    public static final String EDGE = "edge";
     public static final String DELETE_NODE = "/delete-node/{targetId}";
+
+    public static final String ADD_EDGE = "/add-edge";
 
 
 }

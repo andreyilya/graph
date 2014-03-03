@@ -163,8 +163,11 @@
                             dropped = particleSystem.nearest(_mouseP2);	//определяем ближайшую вершину к нажатию
 
                             if (dropped.distance < w) {
-                                //TODO  relations drag/drop
-                                sys.addEdge(dragged, dropped, {"roadLength": "1"});
+                                //TODO: lenght, direction
+                                $.post("add-edge", "sourceCity=" + dragged.node.name + "&targetCity=" + dropped.node.name + "&roadLength=1", function (data) {
+                                    //get from data
+                                    sys.addEdge(dragged.node.name, dropped.node.name, {"roadLength": "1"});
+                                }, 'json');
                             }
                             relation = false;
                             $(window).unbind('mouseup', handler.dropped);

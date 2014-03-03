@@ -1,7 +1,9 @@
 package graph.ui.web;
 
 import graph.engine.dto.City;
+import graph.engine.dto.Road;
 import graph.engine.service.api.CityService;
+import graph.engine.service.api.RoadService;
 import graph.ui.util.Json;
 import graph.ui.util.Routes;
 import java.util.Map;
@@ -26,6 +28,9 @@ public class GraphController {
 
     @Autowired
     private CityService cityService;
+
+    @Autowired
+    private RoadService roadService;
 
     @RequestMapping(Routes.GRAPH_PAGE)
     public String getGraphPage(Map<String, Object> map) {
@@ -57,6 +62,16 @@ public class GraphController {
     void deleteNode(@PathVariable(Routes.TARGET_ID) String targetId) {
         // CHECKSTYLE:ON
         cityService.delete(targetId);
+    }
+
+    // CHECKSTYLE:OFF
+    @RequestMapping(value = Routes.ADD_EDGE, method = RequestMethod.POST)
+    public
+    @ResponseBody
+    ResponseEntity<String> addEdge(@ModelAttribute(Routes.EDGE) Road road, BindingResult result) {
+        // CHECKSTYLE:ON
+        //TODO: correct save to db
+        return Json.createJsonResponse(roadService.save(road));
     }
 
 }
