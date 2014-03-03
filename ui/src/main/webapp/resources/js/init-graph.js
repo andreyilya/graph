@@ -4,6 +4,7 @@
         var ctx = canvas.getContext("2d");
         var particleSystem;
         var w = 10;			//ширина квадрата
+        var addNode;
 
         var that = {
             init: function (system) {
@@ -90,12 +91,23 @@
                         dragged = particleSystem.nearest(_mouseP);	//определяем ближайшую вершину к нажатию
 
                         //context menu here
-                        $(document).contextMenu('contextMenu', {
+                        $("canvas").contextMenu('contextMenu', {
                             bindings: {
                                 'createNode': function (t) {
-//                                    TODO: dialog
-                                    sys.addNode("new node", {"name": "new node"});
-                                    sys.getNode("new node").p = particleSystem.fromScreen(_mouseP);
+
+                                    $( "#dialog" ).dialog( "open" );
+                                    $("#createCity").bind("click", function () {
+
+                                        $.post("add-node",$("#createCityForm").serialize(), function(data){
+                                            sys.addNode(data.id, {"name": data.name});
+                                            sys.getNode(data.id).p = particleSystem.fromScreen(_mouseP);
+                                            $( "#dialog" ).dialog( "close" );
+                                        }, 'json') ;
+
+                                    });
+
+
+
                                 },
                                 'deleteNode': function (t) {
                                     alert('Trigger was ' + t.id + '\nAction was deleteNode');
@@ -190,6 +202,10 @@
                     });
                 });
 
+        });
+        $(function () {
+            //TODO: unbind context menu
+            $("#dialog").dialog({ autoOpen: false });
         });
 
     });

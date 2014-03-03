@@ -15,7 +15,9 @@ public final class Routes {
     //TODO route controller
     public static final String GRAPH_PAGE = "/graph";
     public static final String GRAPH_DATA = "/graph-data/{targetId}/{recursionDepth}";
+    public static final String ADD_NODE = "/add-node";
     public static final String TARGET_ID = "targetId";
     public static final String RECURSION_DEPTH = "recursionDepth";
+    public static final String CITY = "city";
 
 }

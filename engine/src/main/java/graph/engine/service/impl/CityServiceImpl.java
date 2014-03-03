@@ -1,5 +1,6 @@
 package graph.engine.service.impl;
 
+import graph.engine.converter.CityConverter;
 import graph.engine.converter.GraphConverter;
 import graph.engine.dto.City;
 import graph.engine.dto.CityGraph;
@@ -23,6 +24,9 @@ public class CityServiceImpl implements CityService {
 
     @Autowired
     private GraphConverter graphConverter;
+
+    @Autowired
+    private CityConverter cityConverter;
 
     @Override
     @Transactional
@@ -91,11 +95,13 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public City save(City city) {
-        return null;
+        CityEntity cityEntity = cityConverter.assemble(city);
+        return cityConverter.disassemble(cityRepository.save(cityEntity));
     }
 
     @Override
     public City findOne(String id) {
-        return null;
+        return cityConverter.disassemble(cityRepository.findOne(id));
+
     }
 }

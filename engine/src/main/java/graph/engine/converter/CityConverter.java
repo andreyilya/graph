@@ -12,7 +12,12 @@ import org.springframework.stereotype.Component;
 public class CityConverter extends AbstractConverter<City, CityEntity> {
     @Override
     public CityEntity assemble(City city) {
-        return null;
+        //TODO: update
+        CityEntity cityEntity = new CityEntity();
+        cityEntity.setId(city.getId());
+        cityEntity.setName(city.getName());
+        cityEntity.setPopulation(city.getPopulation());
+        return cityEntity;
     }
 
     @Override
@@ -21,7 +26,6 @@ public class CityConverter extends AbstractConverter<City, CityEntity> {
         city.setId(cityEntity.getId());
         city.setName(cityEntity.getName());
         city.setPopulation(cityEntity.getPopulation());
-        city.setName(cityEntity.getName());
         return city;
     }
 }

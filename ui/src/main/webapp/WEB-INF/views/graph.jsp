@@ -12,6 +12,7 @@
     <meta http-equiv="Content-Script-Type" content="text/javascript; charset=utf-8">
     <%--//TODO: to variable path--%>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/resources/css/style.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/resources/css/jquery-ui.css">
     <title>Граф</title>
 </head>
 <body>
@@ -35,12 +36,21 @@
 </div>
 <div class="contextMenu" id="contextMenu" >
     <ul>
-        <li id="createNode"> Create node</li>
-        <li id="deleteNode"> Delete node</li>
+        <li id="createNode">Создать город</li>
+        <li id="deleteNode">Удалить город</li>
     </ul>
 
 </div>
+<div id="dialog" title="Создать город">
+    <form id="createCityForm" method="post" action="add-node" onsubmit='return false;'>
+        <parts:formfield label="Имя" value="name"/>
+        <parts:formfield label="Население" value="population"/>
+        <button id="createCity">Создать</button>
+    </form>
+</div>
+
 <script src="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/resources/js/jquery.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/resources/js/jquery-ui.js" type="text/javascript"></script>
 <script src="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/resources/js/arbor.js" type="text/javascript"></script>
 <script src="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/resources/js/arbor-tween.js" type="text/javascript"></script>
 <script src="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/resources/js/contextmenu.js" type="text/javascript"></script>
