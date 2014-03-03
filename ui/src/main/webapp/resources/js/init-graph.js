@@ -117,8 +117,6 @@
                                 if (dragged && dragged.node !== null) {
                                     dragged.node.fixed = true;	//фиксируем её
                                 }
-                                //TODO: mouse handling here
-                                var id = dragged.node.name;
 
                                 $(canvas).bind('mousemove', handler.dragged);	//слушаем события перемещения мыши
                                 $(window).bind('mouseup', handler.dropped);		//и отпускания кнопки
@@ -194,7 +192,7 @@
             $("#dialog").dialog({ autoOpen: false });
         });
 
-        $("#createCity").click({_mouseP: _mouseP}, function (event) {
+        $("#createCity").click({_mouseP: _mouseP}, function () {
 
             $.post("add-node",$("#createCityForm").serialize(), function(data){
                 sys.addNode(data.id, {"name": data.name});
