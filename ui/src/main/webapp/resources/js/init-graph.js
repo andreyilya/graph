@@ -1,11 +1,10 @@
 (function ($) {
+    var _mouseP;
+    var particleSystem;
     var Renderer = function (canvas) {
         var canvas = $(canvas).get(0);
         var ctx = canvas.getContext("2d");
-        var particleSystem;
         var w = 10;			//ширина квадрата
-        var addNode;
-
         var that = {
             init: function (system) {
                 //начальная инициализация
@@ -94,20 +93,7 @@
                         $("canvas").contextMenu('contextMenu', {
                             bindings: {
                                 'createNode': function (t) {
-
                                     $( "#dialog" ).dialog( "open" );
-                                    $("#createCity").bind("click", function () {
-
-                                        $.post("add-node",$("#createCityForm").serialize(), function(data){
-                                            sys.addNode(data.id, {"name": data.name});
-                                            sys.getNode(data.id).p = particleSystem.fromScreen(_mouseP);
-                                            $( "#dialog" ).dialog( "close" );
-                                        }, 'json') ;
-
-                                    });
-
-
-
                                 },
                                 'deleteNode': function (t) {
                                     alert('Trigger was ' + t.id + '\nAction was deleteNode');
@@ -206,6 +192,16 @@
         $(function () {
             //TODO: unbind context menu
             $("#dialog").dialog({ autoOpen: false });
+        });
+
+        $("#createCity").click({_mouseP: _mouseP}, function (event) {
+
+            $.post("add-node",$("#createCityForm").serialize(), function(data){
+                sys.addNode(data.id, {"name": data.name});
+                sys.getNode(data.id).p = particleSystem.fromScreen(_mouseP);
+                $( "#dialog" ).dialog( "close" );
+            }, 'json') ;
+
         });
 
     });
