@@ -87,8 +87,32 @@
                     clicked: function (e) {	//нажали
                         var pos = $(canvas).offset();	//получаем позицию canvas
                         _mouseP = arbor.Point(e.pageX - pos.left, e.pageY - pos.top); //и позицию нажатия кнопки относительно canvas
-                        //TODO: only on node not nearest
                         dragged = particleSystem.nearest(_mouseP);	//определяем ближайшую вершину к нажатию
+
+                        //context menu here
+                        $(document).contextMenu('contextMenu', {
+                            bindings: {
+                                'createNode': function (t) {
+//                                    TODO: dialog
+                                    sys.addNode("new node", {"name": "new node"});
+                                    sys.getNode("new node").p = particleSystem.fromScreen(_mouseP);
+                                },
+                                'deleteNode': function (t) {
+                                    alert('Trigger was ' + t.id + '\nAction was deleteNode');
+                                }
+
+                            }, onShowMenu: function (e, menu) {
+                                if (dragged.distance < w) {
+                                    $('#createNode', menu).remove();
+                                } else {
+                                    $('#deleteNode', menu).remove();
+                                }
+
+                                return menu;
+
+                            }
+
+                        });
 
                         if (e.button == 0) {
                             if (dragged.distance < w) {
@@ -97,40 +121,13 @@
                                 }
                                 //TODO: mouse handling here
                                 var id = dragged.node.name;
-                                // alert('Node selected: ' + id);
+
                                 $(canvas).bind('mousemove', handler.dragged);	//слушаем события перемещения мыши
                                 $(window).bind('mouseup', handler.dropped);		//и отпускания кнопки
                             }
                         } else if (e.button == 2) {
                             if (dragged.distance < w) {
-                               //context menu here
-                            $(document).contextMenu('myMenu1', {
-                                    bindings: {
-                                        'open': function(t) {
-                                            alert('Trigger was '+t.id+'\nAction was Open');
-                                        },
-                                        'email': function(t) {
-                                            alert('Trigger was '+t.id+'\nAction was Email');
-                                        },
-
-                                        'save': function(t) {
-                                            alert('Trigger was '+t.id+'\nAction was Save');
-                                        },
-
-                                        'delete': function(t) {
-                                            alert('Trigger was '+t.id+'\nAction was Delete');
-                                        }
-
-                                    } , onShowMenu: function(e, menu) {
-                                    if (dragged.distance < w)  {
-                                        $('#open', menu).remove();
-                                }
-
-                                    return menu;
-
-                                }
-
-                                });
+                                //TODO  relations drag/drop
                             }
                         }
                         return false;
