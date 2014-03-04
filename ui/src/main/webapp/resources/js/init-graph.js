@@ -162,7 +162,7 @@
                             _mouseP2 = arbor.Point(e.pageX - pos2.left, e.pageY - pos2.top); //и позицию нажатия кнопки относительно canvas
                             dropped = particleSystem.nearest(_mouseP2);	//определяем ближайшую вершину к нажатию
 
-                            if (dropped.distance < w) {
+                            if (dropped.distance < w && dragged.node.name != dropped.node.name) {
                                 //TODO: lenght, direction
                                 $.post("add-edge", "sourceCity=" + dragged.node.name + "&targetCity=" + dropped.node.name + "&roadLength=1", function (data) {
                                     //get from data

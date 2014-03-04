@@ -2,6 +2,7 @@ package graph.engine.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,7 +21,7 @@ public class CityEntity extends IdentifiableEntity {
     @Column
     private Integer population;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<RoadEntity> roads;
 
     public String getName() {

@@ -107,6 +107,7 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public void delete(String id) {
+        //tODO delete roads by city id;(named query)
         cityRepository.delete(id);
     }
 }
