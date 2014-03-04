@@ -47,26 +47,26 @@ public class CityDaoImplTest {
         city4.setName("city4");
 
         RoadEntity road1 = new RoadEntity();
-        road1.setLenght(1L);
+        road1.setLength(1L);
         road1.setSourceCity(city1);
         road1.setTargetCity(city2);
         road1.setDirection(Direction.BOTH);
 
 
         RoadEntity road2 = new RoadEntity();
-        road2.setLenght(10L);
+        road2.setLength(10L);
         road2.setSourceCity(city2);
         road2.setTargetCity(city3);
         road2.setDirection(Direction.BOTH);
 
         RoadEntity road3 = new RoadEntity();
-        road3.setLenght(2L);
+        road3.setLength(2L);
         road3.setSourceCity(city3);
         road3.setTargetCity(city1);
         road3.setDirection(Direction.BOTH);
 
         RoadEntity road4 = new RoadEntity();
-        road4.setLenght(4L);
+        road4.setLength(4L);
         road4.setSourceCity(city3);
         road4.setTargetCity(city4);
         road4.setDirection(Direction.BOTH);

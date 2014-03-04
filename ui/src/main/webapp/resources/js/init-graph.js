@@ -166,7 +166,7 @@
                                 //TODO: lenght, direction
                                 $.post("add-edge", "sourceCity=" + dragged.node.name + "&targetCity=" + dropped.node.name + "&roadLength=1", function (data) {
                                     //get from data
-                                    sys.addEdge(dragged.node.name, dropped.node.name, {"roadLength": "1"});
+                                    sys.addEdge(data.sourceCity, data.targetCity, {"roadLength": data.roadLength});
                                 }, 'json');
                             }
                             relation = false;

@@ -31,12 +31,12 @@ public class RoadEntity extends IdentifiableEntity {
     @Column
     private Direction direction;
 
-    public Long getLenght() {
+    public Long getLength() {
         return lenght;
     }
 
-    public void setLenght(Long lenght) {
-        this.lenght = lenght;
+    public void setLength(Long length) {
+        this.lenght = length;
     }
 
     public String getQuantity() {

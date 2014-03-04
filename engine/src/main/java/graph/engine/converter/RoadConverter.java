@@ -13,14 +13,19 @@ public class RoadConverter extends AbstractConverter<Road, RoadEntity> {
 
     @Override
     public RoadEntity assemble(Road road) {
-        return null;
+        RoadEntity roadEntity = new RoadEntity();
+        roadEntity.setId(road.getId());
+        roadEntity.setLength(road.getRoadLength());
+        roadEntity.setQuantity(road.getQuantity());
+        roadEntity.setDirection(road.getDirection());
+        return roadEntity;
     }
 
     @Override
     public Road disassemble(RoadEntity roadEntity) {
         Road road = new Road();
         road.setId(roadEntity.getId());
-        road.setRoadLength(roadEntity.getLenght());
+        road.setRoadLength(roadEntity.getLength());
         road.setQuantity(roadEntity.getQuantity());
         road.setDirection(roadEntity.getDirection());
         if (roadEntity.getSourceCity() != null) {

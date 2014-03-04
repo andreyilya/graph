@@ -1,5 +1,6 @@
 package graph.engine.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -44,5 +45,13 @@ public class CityEntity extends IdentifiableEntity {
 
     public void setRoads(List<RoadEntity> roads) {
         this.roads = roads;
+    }
+
+    public CityEntity addRoad(RoadEntity roadEntity) {
+        if (roads == null) {
+            roads = new ArrayList<>();
+        }
+        roads.add(roadEntity);
+        return this;
     }
 }
