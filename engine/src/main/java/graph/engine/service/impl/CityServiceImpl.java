@@ -7,6 +7,7 @@ import graph.engine.dto.CityGraph;
 import graph.engine.dto.Road;
 import graph.engine.model.CityEntity;
 import graph.engine.repository.api.CityRepository;
+import graph.engine.repository.api.RoadRepository;
 import graph.engine.service.api.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,9 @@ public class CityServiceImpl implements CityService {
 
     @Autowired
     private CityRepository cityRepository;
+
+    @Autowired
+    private RoadRepository roadRepository;
 
     @Autowired
     private GraphConverter graphConverter;
@@ -106,8 +110,10 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
+    @Transactional
     public void delete(String id) {
-        //tODO delete roads by city id;(named query)
+
+        roadRepository.deleteRoads(id);
         cityRepository.delete(id);
     }
 }
