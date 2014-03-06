@@ -28,8 +28,11 @@
                 var nodeBoxes = {};
                 particleSystem.eachNode(	//теперь каждую вершину
                     function (node, pt) {		//получаем вершину и точку где она
-
-                        ctx.fillStyle = "orange";	//с его цветом понятно
+                        if (node.data['color'] != null) {
+                            ctx.fillStyle = node.data['color'];
+                        } else {
+                            ctx.fillStyle = "orange";	//с его цветом понятно
+                        }
                         ctx.fillRect(pt.x - w / 2, pt.y - w / 2, w, w);	//рисуем
                         ctx.fillStyle = "black";	//цвет для шрифта
                         ctx.font = 'italic 13px sans-serif'; //шрифт
@@ -106,25 +109,11 @@
 
                                 'from': function (t) {
                                     from = dragged.node.name;
-                                    if(to!=null){
-                                        //TODO : query route
-                                        from = null;
-                                        to=null;
-                                    }
-//                                    $.post("delete-node/" + dragged.node.name, function () {
-//                                        sys.pruneNode(dragged.node);
-//                                    });
+                                    createRoute(from, to);
                                 },
                                 'to': function (t) {
                                     to = dragged.node.name;
-                                    if(from!=null){
-                                        //TODO : query route
-                                        from = null;
-                                        to=null;
-                                    }
-//                                    $.post("delete-node/" + dragged.node.name, function () {
-//                                        sys.pruneNode(dragged.node);
-//                                    });
+                                    createRoute(from, to);
                                 }
 
                             }, onShowMenu: function (e, menu) {
@@ -210,6 +199,34 @@
             }
 
         };
+
+        function createRoute(from, to) {
+            if (to != null && to != null) {
+                $.get("route-data/" + from + "/" + to, function (data) {
+                    sys.eachNode(function (node) {
+                        node.data["color"] = "orange";
+                    });
+
+                    sys.eachEdge(function (edge) {
+                        edge.data["color"] = "black";
+                    });
+
+                    $.each(data.nodes, function (i, node) {
+                        sys.getNode(node.id).data["color"] = "#0000ff";
+                    });
+
+                    //TODO: color to edge
+//                    $.each(data.edges, function (i, edge) {
+//                        sys.getEdge(edge.id).data["color"] = "#0000ff";
+//                    });
+                    that.redraw();
+
+                });
+                from = null;
+                to = null;
+            }
+        }
+
         return that;
     };
 

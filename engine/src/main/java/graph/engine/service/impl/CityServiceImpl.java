@@ -43,65 +43,16 @@ public class CityServiceImpl implements CityService {
     @Override
     @Transactional
     public CityGraph getRoute(String targetId, String sourceId) {
-        return null;
+        int recursionDepth = 10;
+        CityEntity cityEntity = cityRepository.findOne(targetId);
+        CityGraph cityGraph = graphConverter.disassemble(cityEntity, recursionDepth);
+        return createRoute(cityGraph,recursionDepth);
     }
 
-    // CHECKSTYLE:OFF
-    private CityGraph getStaticCityGraph() {
-        City city1 = new City();
-        city1.setName("city1");
-        city1.setId("city1");
-
-        City city2 = new City();
-        city2.setName("city2");
-        city2.setId("city2");
-
-
-        City city3 = new City();
-        city3.setName("city3");
-        city3.setId("city3");
-
-
-        City city4 = new City();
-        city4.setName("city4");
-        city4.setId("city4");
-
-        CityGraph cityGraph = new CityGraph();
-
-
-        cityGraph.addNode(city1);
-        cityGraph.addNode(city2);
-        cityGraph.addNode(city3);
-        cityGraph.addNode(city4);
-
-        Road road1 = new Road();
-        road1.setRoadLength(4L);
-        road1.setSourceCity(city1.getId());
-        road1.setTargetCity(city2.getId());
-
-        Road road2 = new Road();
-        road2.setRoadLength(12L);
-
-        road2.setSourceCity(city2.getId());
-        road2.setTargetCity(city3.getId());
-
-        Road road3 = new Road();
-        road3.setRoadLength(12L);
-        road3.setSourceCity(city3.getId());
-        road3.setTargetCity(city1.getId());
-
-        Road road4 = new Road();
-        road4.setRoadLength(15L);
-        road4.setSourceCity(city3.getId());
-        road4.setTargetCity(city4.getId());
-
-        cityGraph.addEdge(road1);
-        cityGraph.addEdge(road2);
-        cityGraph.addEdge(road3);
-        cityGraph.addEdge(road4);
-
+    private CityGraph createRoute(CityGraph cityGraph, int recursionDepth) {
         return cityGraph;
     }
+
 
     @Override
     public City save(City city) {
