@@ -1,6 +1,8 @@
 (function ($) {
     var _mouseP;
     var particleSystem;
+    var from;
+    var to;
     var Renderer = function (canvas) {
         var canvas = $(canvas).get(0);
         var ctx = canvas.getContext("2d");
@@ -103,11 +105,23 @@
                                 },
 
                                 'from': function (t) {
+                                    from = dragged.node.name;
+                                    if(to!=null){
+                                        //TODO : query route
+                                        from = null;
+                                        to=null;
+                                    }
 //                                    $.post("delete-node/" + dragged.node.name, function () {
 //                                        sys.pruneNode(dragged.node);
 //                                    });
                                 },
                                 'to': function (t) {
+                                    to = dragged.node.name;
+                                    if(from!=null){
+                                        //TODO : query route
+                                        from = null;
+                                        to=null;
+                                    }
 //                                    $.post("delete-node/" + dragged.node.name, function () {
 //                                        sys.pruneNode(dragged.node);
 //                                    });

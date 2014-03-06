@@ -46,6 +46,15 @@ public class GraphController {
         return Json.createJsonResponse(cityService.queryGraph(targetId, recursionDepth));
     }
 
+     // CHECKSTYLE:OFF
+    @RequestMapping(value = Routes.ROUTE_DATA)
+    public
+    @ResponseBody
+    ResponseEntity<String> getGraphRoute(@PathVariable(Routes.TARGET_ID) String targetId, @PathVariable(Routes.SOURCE_ID) String sourceId) {
+        // CHECKSTYLE:ON
+        return Json.createJsonResponse(cityService.getRoute(targetId, sourceId));
+    }
+
     // CHECKSTYLE:OFF
     @RequestMapping(value = Routes.ADD_NODE,method = RequestMethod.POST)
     public

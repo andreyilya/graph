@@ -40,6 +40,12 @@ public class CityServiceImpl implements CityService {
         // return getStaticCityGraph();
     }
 
+    @Override
+    @Transactional
+    public CityGraph getRoute(String targetId, String sourceId) {
+        return null;
+    }
+
     // CHECKSTYLE:OFF
     private CityGraph getStaticCityGraph() {
         City city1 = new City();
