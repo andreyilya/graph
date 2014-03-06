@@ -100,6 +100,17 @@
                                     $.post("delete-node/" + dragged.node.name, function () {
                                         sys.pruneNode(dragged.node);
                                     });
+                                },
+
+                                'from': function (t) {
+//                                    $.post("delete-node/" + dragged.node.name, function () {
+//                                        sys.pruneNode(dragged.node);
+//                                    });
+                                },
+                                'to': function (t) {
+//                                    $.post("delete-node/" + dragged.node.name, function () {
+//                                        sys.pruneNode(dragged.node);
+//                                    });
                                 }
 
                             }, onShowMenu: function (e, menu) {
@@ -107,6 +118,8 @@
                                     $('#createNode', menu).remove();
                                 } else {
                                     $('#deleteNode', menu).remove();
+                                    $('#from', menu).remove();
+                                    $('#to', menu).remove();
                                 }
 
                                 return menu;

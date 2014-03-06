@@ -38,6 +38,8 @@
     <ul>
         <li id="createNode">Создать город</li>
         <li id="deleteNode">Удалить город</li>
+        <li id="from">Проложить маршрут отсюда</li>
+        <li id="to">Проложить маршрут сюда</li>
     </ul>
 
 </div>
