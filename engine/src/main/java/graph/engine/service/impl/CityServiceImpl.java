@@ -4,7 +4,6 @@ import graph.engine.converter.CityConverter;
 import graph.engine.converter.GraphConverter;
 import graph.engine.dto.City;
 import graph.engine.dto.CityGraph;
-import graph.engine.dto.Road;
 import graph.engine.model.CityEntity;
 import graph.engine.repository.api.CityRepository;
 import graph.engine.repository.api.RoadRepository;
@@ -20,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class CityServiceImpl implements CityService {
 
+    public static final int RECURSION_DEPTH = 10;
     @Autowired
     private CityRepository cityRepository;
 
@@ -43,10 +43,10 @@ public class CityServiceImpl implements CityService {
     @Override
     @Transactional
     public CityGraph getRoute(String targetId, String sourceId) {
-        int recursionDepth = 10;
+        int recursionDepth = RECURSION_DEPTH;
         CityEntity cityEntity = cityRepository.findOne(targetId);
         CityGraph cityGraph = graphConverter.disassemble(cityEntity, recursionDepth);
-        return createRoute(cityGraph,recursionDepth);
+        return createRoute(cityGraph, recursionDepth);
     }
 
     private CityGraph createRoute(CityGraph cityGraph, int recursionDepth) {

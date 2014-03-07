@@ -25,4 +25,9 @@ public abstract class Identifiable {
             return this.id.equals(((Identifiable) obj).getId());
         }
     }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
 }
