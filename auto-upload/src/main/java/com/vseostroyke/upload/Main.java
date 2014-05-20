@@ -1,10 +1,6 @@
 package com.vseostroyke.upload;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 
 /**
@@ -17,8 +13,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        FTPClient ftpClient = connectToFTP("k29.hostenko.com", 21, LOGIN, PASSWORD);
-        FtpSession ftpSession = new FtpSession(ftpClient);
+        FtpSession ftpSession = new FtpSession("k29.hostenko.com", 21, LOGIN, PASSWORD);
         FTPFile[] listFtpFile = ftpSession.list("/wp-content/uploads");
         for (FTPFile ftpFile1 : listFtpFile) {
             System.out.println("Name - " + ftpFile1.getName() +
@@ -27,7 +22,6 @@ public class Main {
                     "Type - " + ftpFile1.getType());
         }
     }
-
 
 
 }
