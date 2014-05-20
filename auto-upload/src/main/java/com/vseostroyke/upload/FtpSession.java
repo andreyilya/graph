@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Paths;
-
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 //import org.springframework.integration.file.remote.session.Session;
@@ -22,27 +21,28 @@ import org.apache.commons.net.ftp.FTPFile;
  * @author Dmitry Ryabov
  * @since 2.0
  */
-public class FtpSession  {
+public class FtpSession {
 
     public static final String SEPARATOR = "/";
 
 
-    private final FTPClient client;
+    private FTPClient client;
 
     public FtpSession(FTPClient client) {
         this.client = client;
     }
 
-    public FtpSession (String address, int port, String username, String password){
-        connectToFTP(address,port,username,password);
+    public FtpSession(String address, int port, String username, String password) throws IOException {
+        connectToFTP(address, port, username, password);
     }
+
     public FTPClient connectToFTP(String address, int port, String username, String password)
             throws IOException {
-        FTPClient ftpClient = new FTPClient();
-        ftpClient.connect(address, port);
-        ftpClient.login(username, password);
+        client = new FTPClient();
+        client.connect(address, port);
+        client.login(username, password);
 
-        return ftpClient;
+        return client;
     }
 
     public boolean remove(String path) throws IOException {
@@ -82,7 +82,7 @@ public class FtpSession  {
         }
     }
 
-    public boolean downloadFromFTP (String fileName) throws IOException {
+    public boolean downloadFromFTP(String fileName) throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream("/home/house_md/" + fileName);
         boolean isDownload = client.retrieveFile(fileName, fileOutputStream);
         fileOutputStream.flush();
@@ -111,25 +111,22 @@ public class FtpSession  {
     public void close() throws IOException {
         try {
             this.client.disconnect();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw e;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
         }
     }
 
     public boolean isOpen() {
         try {
             this.client.noop();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return false;
         }
         return true;
     }
 
-    public void rename(String pathFrom, String pathTo) throws IOException{
+    public void rename(String pathFrom, String pathTo) throws IOException {
         this.client.deleteFile(pathTo);
         boolean completed = this.client.rename(pathFrom, pathTo);
         if (!completed) {
@@ -143,17 +140,16 @@ public class FtpSession  {
         return client.makeDirectory(remoteDirectory);
     }
 
-    public boolean exists(String path) throws IOException{
+    public boolean exists(String path) throws IOException {
 
         String currentWorkingPath = this.client.printWorkingDirectory();
         boolean exists = false;
 
         try {
-            if (this.client.changeWorkingDirectory(path)){
+            if (this.client.changeWorkingDirectory(path)) {
                 exists = true;
             }
-        }
-        finally {
+        } finally {
             this.client.changeWorkingDirectory(currentWorkingPath);
         }
 
