@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Arrays;
-
+import org.apache.commons.net.ftp.FTPFile;
 /**
  * User: a.radkov
  * Date: 20.05.2014
