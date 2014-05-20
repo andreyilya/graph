@@ -1,5 +1,8 @@
 package com.vseostroyke.upload;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -28,6 +31,18 @@ public class FtpSession  {
 
     public FtpSession(FTPClient client) {
         this.client = client;
+    }
+
+    public FtpSession (String address, int port, String username, String password){
+        connectToFTP(address,port,username,password);
+    }
+    public FTPClient connectToFTP(String address, int port, String username, String password)
+            throws IOException {
+        FTPClient ftpClient = new FTPClient();
+        ftpClient.connect(address, port);
+        ftpClient.login(username, password);
+
+        return ftpClient;
     }
 
     public boolean remove(String path) throws IOException {
@@ -59,18 +74,36 @@ public class FtpSession  {
         return this.client.listNames(path);
     }
 
-    public void read(String path, OutputStream fos) throws IOException {
-        boolean completed = this.client.retrieveFile(path, fos);
+    public void downloadFromFTP(String path, OutputStream fos) throws IOException {
+        boolean completed = client.retrieveFile(path, fos);
         if (!completed) {
             throw new IOException("Failed to copy '" + path +
                     "'. Server replied with: " + this.client.getReplyString());
         }
     }
 
-    public void write(InputStream inputStream, String path) throws IOException {
-        boolean completed = this.client.storeFile(path, inputStream);
+    public boolean downloadFromFTP (String fileName) throws IOException {
+        FileOutputStream fileOutputStream = new FileOutputStream("/home/house_md/" + fileName);
+        boolean isDownload = client.retrieveFile(fileName, fileOutputStream);
+        fileOutputStream.flush();
+        fileOutputStream.close();
+
+        return isDownload;
+    }
+
+    public void uploadToFTP(InputStream inputStream, String path) throws IOException {
+        boolean completed = client.storeFile(path, inputStream);
         if (!completed) {
             throw new IOException("Failed to write to '" + path
+                    + "'. Server replied with: " + this.client.getReplyString());
+        }
+    }
+
+    public void uploadToFTP(File file) throws IOException {
+        FileInputStream fileInputStream = new FileInputStream(file);
+        boolean completed = client.storeFile("/" + file.getName(), fileInputStream);
+        if (!completed) {
+            throw new IOException("Failed to write to '" + file.getName()
                     + "'. Server replied with: " + this.client.getReplyString());
         }
     }
@@ -106,7 +139,8 @@ public class FtpSession  {
     }
 
     public boolean mkdir(String remoteDirectory) throws IOException {
-        return this.client.makeDirectory(remoteDirectory);
+        client.changeToParentDirectory();
+        return client.makeDirectory(remoteDirectory);
     }
 
     public boolean exists(String path) throws IOException{
