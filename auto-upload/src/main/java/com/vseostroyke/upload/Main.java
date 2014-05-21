@@ -1,11 +1,9 @@
 package com.vseostroyke.upload;
 
-import com.vseostroyke.upload.ftp.FtpSession;
 import com.vseostroyke.upload.http.ContentExtractor;
-import com.vseostroyke.upload.http.ContentXpath;
-import java.io.File;
 import java.io.IOException;
-import org.apache.commons.net.ftp.FTPFile;
+import javax.xml.parsers.ParserConfigurationException;
+import org.xml.sax.SAXException;
 
 /**
  * User: a.radkov
@@ -15,7 +13,7 @@ public class Main {
     public static final String LOGIN = "fftdfbzs29847";
     public static final String PASSWORD = "Q8ibY.y511((32";
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ParserConfigurationException, SAXException {
 
        // FtpSession ftpSession = new FtpSession("k29.hostenko.com", 21, LOGIN, PASSWORD);
        // FTPFile[] listFtpFile = ftpSession.list("/wp-content/uploads");
@@ -27,7 +25,7 @@ public class Main {
 //        }
 //        ftpSession.uploadToFTP(new File("d://graf_monte_kristo.pdf"));
         ContentExtractor contentExtractor = new ContentExtractor();
-        contentExtractor.getHTML("http://google.com");
+        contentExtractor.extract("https://www.youtube.com/watch?v=Tc43phV1ZkE");
     }
 
 
