@@ -1,4 +1,4 @@
-package com.vseostroyke.upload;
+package com.vseostroyke.upload.ftp;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -101,7 +101,7 @@ public class FtpSession {
 
     public void uploadToFTP(File file) throws IOException {
         FileInputStream fileInputStream = new FileInputStream(file);
-        boolean completed = client.storeFile("/" + file.getName(), fileInputStream);
+        boolean completed = client.storeFile("/wp-content/uploads/" + file.getName(), fileInputStream);
         if (!completed) {
             throw new IOException("Failed to write to '" + file.getName()
                     + "'. Server replied with: " + this.client.getReplyString());
