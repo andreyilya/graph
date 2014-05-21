@@ -26,10 +26,10 @@ public class Main {
 //                    "Type - " + ftpFile1.getType());
 //        }
 //        ftpSession.uploadToFTP(new File("d://graf_monte_kristo.pdf"));
-        ContentExtractor contentExtractor = new ContentExtractor();
-        ContentItem contentItem = contentExtractor.extract("http://www.domovoy.by/good/id/4973/900/901");
+  //      ContentExtractor contentExtractor = new ContentExtractor();
+   //     ContentItem contentItem = contentExtractor.extract("http://www.domovoy.by/good/id/4973/900/901");
         RemoteRepository remoteRepository = new RemoteRepository();
-        remoteRepository.saveContent(contentItem);
+        remoteRepository.saveContent(new ContentItem());
     }
 
 
