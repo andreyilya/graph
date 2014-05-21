@@ -1,11 +1,11 @@
 package com.vseostroyke.upload.sql;
 
 import com.vseostroyke.upload.http.ContentItem;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+//import java.sql.Connection;
+//import java.sql.DriverManager;
+//import java.sql.ResultSet;
+//import java.sql.SQLException;
+//import java.sql.Statement;
 
 /**
  * User: a.radkov
@@ -13,10 +13,15 @@ import java.sql.Statement;
  */
 public class RemoteRepository {
 
-    public void generateSql(ContentItem contentItem, String path){
-
+    public void generateSql(ContentItem contentItem, String path) {
+        String sqlTemplate = "START TRANSACTION; insert into wp_posts" +
+                " (post_author, post_content, post_title, post_status, comment_status, ping_status,post_name,post_type) values" +
+                " (3,'%s','%s','draft','closed','closed','testing-query','post');select LAST_INSERT_ID();COMMIT;";
+        String sqlCode = String.format(sqlTemplate,
+                contentItem.getContent(), contentItem.getTitle());
     }
-    public void saveContent(ContentItem contentItem){
+
+    public void saveContent(ContentItem contentItem) {
 //        String login = "krdraki756_29847";//Логин пользователя
 //        String password = "ZRQeb2Bf4h";//Пароль пользователя
 //   //     String url = "jdbc:mysql://kryshi.vseostroyke.by:3306/nayfke3756_29847";//URL адрес
