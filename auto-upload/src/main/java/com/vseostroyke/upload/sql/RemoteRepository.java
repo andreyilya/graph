@@ -1,6 +1,8 @@
 package com.vseostroyke.upload.sql;
 
 import com.vseostroyke.upload.http.ContentItem;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 //import java.sql.Connection;
 //import java.sql.DriverManager;
 //import java.sql.ResultSet;
@@ -22,7 +24,13 @@ public class RemoteRepository {
                 " insert into wp_term_relationships (object_id,term_taxonomy_id) values (@last_insert_id, 2);COMMIT;";
         String sqlCode = String.format(sqlTemplate,
                 contentItem.getContent(), contentItem.getTitle());
-    }
+		try {
+			PrintWriter out = new PrintWriter("d://dump.sql");
+			out.print(sqlCode);
+		} catch (FileNotFoundException e) {
+			//DO NOTHING
+		}
+	}
 
     public void saveContent(ContentItem contentItem) {
 //        String login = "krdraki756_29847";//Логин пользователя
