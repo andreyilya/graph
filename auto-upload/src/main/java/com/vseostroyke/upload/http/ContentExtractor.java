@@ -23,8 +23,6 @@ import org.xml.sax.SAXException;
  */
 public class ContentExtractor {
 
-    public static final String UTF_8 = "UTF-8";
-
     public ContentItem extract(String url) throws ParserConfigurationException, IOException, SAXException {
         ContentDOMpath domPath = prepareDomPath();
         Document doc = Jsoup.connect(url).get();
@@ -38,35 +36,6 @@ public class ContentExtractor {
         return contentItem;
     }
 
-    public String getHTML(String url) {
-        String result = "";
-        try {
-            HttpClient client = new DefaultHttpClient();
-            HttpParams httpParameters = client.getParams();
-            HttpConnectionParams.setConnectionTimeout(httpParameters, 5000);
-            HttpConnectionParams.setSoTimeout(httpParameters, 5000);
-            HttpConnectionParams.setTcpNoDelay(httpParameters, true);
-            HttpGet request = new HttpGet();
-            request.setURI(new URI(url));
-            HttpResponse response = client.execute(request);
-            InputStream ips = response.getEntity().getContent();
-            BufferedReader buf = new BufferedReader(new InputStreamReader(ips, UTF_8));
-            StringBuilder sb = new StringBuilder();
-            String s;
-            while (true) {
-                s = buf.readLine();
-                if (s == null || s.length() == 0)
-                    break;
-                sb.append(s);
-            }
-            buf.close();
-            ips.close();
-            result = sb.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
 
     private ContentDOMpath prepareDomPath() {
         ContentDOMpath domPath = new ContentDOMpath();
