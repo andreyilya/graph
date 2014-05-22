@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
+import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -34,11 +35,11 @@ public class ContentExtractor {
         Elements header = doc.select(domPath.getHeaderXpath());
 
         ContentItem contentItem = new ContentItem();
-        contentItem.setTitle(getHtml(title));
+        contentItem.setTitle(getInnerHtml(title));
         contentItem.setDescription(getAttribute(description, "content"));
         contentItem.setKeywords(getAttribute(keywords, "content"));
-        contentItem.setContent(getHtml(content));
-        contentItem.setHeader(getHtml(header));
+        contentItem.setContent(getOuterHtml(content));
+        contentItem.setHeader(getOuterHtml(header));
         contentItem.setCategoryId(2L);//TODO: normal
         contentItem.setWide("true");//TODO: normal
         return contentItem;
@@ -48,11 +49,18 @@ public class ContentExtractor {
         return elements.first().attr(attribute);
     }
 
-    private String getHtml(Elements title) {
+    private String getOuterHtml(Elements title) {
+        if (title.first() != null) {
+            return title.first().outerHtml();
+        } else {
+            return StringUtils.EMPTY;
+        }
+    }
+    private String getInnerHtml(Elements title) {
         if (title.first() != null) {
             return title.first().html();
         } else {
-            return "";
+            return StringUtils.EMPTY;
         }
     }
 
@@ -60,7 +68,7 @@ public class ContentExtractor {
     private ContentDOMpath prepareDomPath() {
         ContentDOMpath domPath = new ContentDOMpath();
         domPath.setTitleXpath("title");
-        domPath.setContentXpath("#content");
+        domPath.setContentXpath("#content #content");
         domPath.setDescriptionXpath("meta[name=description]");
         domPath.setKeywordsXpath("meta[name=keywords]");
         domPath.setHeaderXpath("h1");
