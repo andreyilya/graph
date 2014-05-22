@@ -25,7 +25,7 @@ public class RemoteRepository {
         try {
             FileUtils.writeLines(new File(path), scripts);
         } catch (IOException e) {
-            //DO NOTHING
+            e.printStackTrace();
         }
     }
 
@@ -35,9 +35,20 @@ public class RemoteRepository {
                 " (post_author, post_content, post_title, post_status, comment_status, ping_status,post_name,post_type) values" +
                 " (3,'%s','%s','draft','closed','closed','testing-query','post');" +
                 "SET @last_insert_id = LAST_INSERT_ID();" +
-                " insert into wp_term_relationships (object_id,term_taxonomy_id) values (@last_insert_id, 2);COMMIT;";
-        return String.format(sqlTemplate,
-                contentItem.getContent(), contentItem.getTitle());
+                " insert into wp_term_relationships (object_id,term_taxonomy_id) values (@last_insert_id, '%s');" +
+                " insert into wp_postmeta (post_id, meta_key, meta_value) values (@last_insert_id, '_aioseop_title', '%s');" +
+                " insert into wp_postmeta (post_id, meta_key, meta_value) values (@last_insert_id, '_aioseop_description', '%s');" +
+                " insert into wp_postmeta (post_id, meta_key, meta_value) values (@last_insert_id, '_aioseop_keywords', '%s');" +
+                " insert into wp_postmeta (post_id, meta_key, meta_value) values (@last_insert_id, 'wide', '%s');" +
+                "COMMIT;";
+        return String.format(sqlTemplate
+                , contentItem.getContent()
+                , contentItem.getHeader()
+                , contentItem.getCategoryId()
+                , contentItem.getTitle()
+                , contentItem.getDescription()
+                , contentItem.getKeywords()
+                , contentItem.getWide());
     }
 
 }

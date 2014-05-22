@@ -27,7 +27,7 @@ public class Main {
 //                    "Link - " + ftpFile1.getLink() +
 //                    "Type - " + ftpFile1.getType());
 //        }
-//        ftpSession.uploadToFTP(new File("d://graf_monte_kristo.pdf"));
+//        ftpSession.uploadToFTP(new File("d://graf_monte_kristo.pdf"))e.e.;
         ContentExtractor contentExtractor = new ContentExtractor();
         List<ContentItem> contentItems = contentExtractor.extract(Arrays.asList("http://www.domovoy.by/good/id/4973/900/901","http://www.domovoy.by/good/id/2047/700/709"));
         RemoteRepository remoteRepository = new RemoteRepository();

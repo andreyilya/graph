@@ -39,6 +39,8 @@ public class ContentExtractor {
         contentItem.setKeywords(getAttribute(keywords, "content"));
         contentItem.setContent(getHtml(content));
         contentItem.setHeader(getHtml(header));
+        contentItem.setCategoryId(2L);//TODO: normal
+        contentItem.setWide("true");//TODO: normal
         return contentItem;
     }
 

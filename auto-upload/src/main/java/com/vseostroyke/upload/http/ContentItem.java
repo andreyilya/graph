@@ -10,6 +10,7 @@ public class ContentItem {
     private String description;
     private String keywords;
     private String content;
+    private String wide;
 
     private Long categoryId;
 
@@ -59,5 +60,13 @@ public class ContentItem {
 
     public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public String getWide() {
+        return wide;
+    }
+
+    public void setWide(String wide) {
+        this.wide = wide;
     }
 }
