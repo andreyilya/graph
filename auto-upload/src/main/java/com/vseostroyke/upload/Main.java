@@ -4,6 +4,7 @@ import com.vseostroyke.upload.http.ContentExtractor;
 import com.vseostroyke.upload.http.ContentItem;
 import com.vseostroyke.upload.sql.RemoteRepository;
 import java.io.IOException;
+import java.util.Arrays;
 import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
@@ -29,7 +30,7 @@ public class Main {
         ContentExtractor contentExtractor = new ContentExtractor();
         ContentItem contentItem = contentExtractor.extract("http://www.domovoy.by/good/id/4973/900/901");
         RemoteRepository remoteRepository = new RemoteRepository();
-        remoteRepository.generateSql(contentItem,"");
+        remoteRepository.generateSqlFile(Arrays.asList(contentItem), "d://dump.sql");
     }
 
 
