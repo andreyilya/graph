@@ -12,6 +12,7 @@ public class MebelNormalizer extends NormalizerBase{
     @Override
     public ContentItem normalize(ContentItem contentItem) {
         ContentItem normalizedContentItem = super.normalize(contentItem);
+        //TODO: replace домовой
         saveFiles(contentItem);
         return normalizedContentItem;
     }
