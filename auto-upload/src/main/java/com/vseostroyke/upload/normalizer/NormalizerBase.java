@@ -28,7 +28,7 @@ public abstract class NormalizerBase implements Normalizer {
         }
     }
 
-    private String getNormalizedHeader(ContentItem contentItem) {
+    protected String getNormalizedHeader(ContentItem contentItem) {
         if (StringUtils.isNotBlank(contentItem.getTitle())) {
             return contentItem.getTitle();
         } else if (StringUtils.isNotBlank(contentItem.getDescription())) {
@@ -37,7 +37,7 @@ public abstract class NormalizerBase implements Normalizer {
         return StringUtils.EMPTY;
     }
 
-    private String getNormalizedTitle(ContentItem contentItem) {
+    protected String getNormalizedTitle(ContentItem contentItem) {
         if (StringUtils.isNotBlank(contentItem.getHeader())) {
             return contentItem.getHeader();
         } else if (StringUtils.isNotBlank(contentItem.getDescription())) {
@@ -46,7 +46,7 @@ public abstract class NormalizerBase implements Normalizer {
         return StringUtils.EMPTY;
     }
 
-    private String getNormalizedDescription(ContentItem contentItem) {
+    protected String getNormalizedDescription(ContentItem contentItem) {
         if (StringUtils.isNotBlank(contentItem.getHeader())) {
             return contentItem.getHeader();
         } else if (StringUtils.isNotBlank(contentItem.getTitle())) {
