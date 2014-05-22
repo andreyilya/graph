@@ -5,6 +5,7 @@ import com.vseostroyke.upload.http.ContentItem;
 import com.vseostroyke.upload.sql.RemoteRepository;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
@@ -28,9 +29,9 @@ public class Main {
 //        }
 //        ftpSession.uploadToFTP(new File("d://graf_monte_kristo.pdf"));
         ContentExtractor contentExtractor = new ContentExtractor();
-        ContentItem contentItem = contentExtractor.extract("http://www.domovoy.by/good/id/4973/900/901");
+        List<ContentItem> contentItems = contentExtractor.extract(Arrays.asList("http://www.domovoy.by/good/id/4973/900/901","http://www.domovoy.by/good/id/2047/700/709"));
         RemoteRepository remoteRepository = new RemoteRepository();
-        remoteRepository.generateSqlFile(Arrays.asList(contentItem), "d://dump.sql");
+        remoteRepository.generateSqlFile(contentItems, "d://dump.sql");
     }
 
 

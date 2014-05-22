@@ -1,6 +1,8 @@
 package com.vseostroyke.upload.http;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -12,6 +14,14 @@ import org.xml.sax.SAXException;
  * Date: 21.05.2014
  */
 public class ContentExtractor {
+
+    public List<ContentItem> extract(List<String> urls) throws IOException, SAXException, ParserConfigurationException {
+        List<ContentItem> contentItems = new ArrayList<>();
+        for(String url:urls) {
+            contentItems.add(extract(url));
+        }
+        return contentItems;
+    }
 
     public ContentItem extract(String url) throws ParserConfigurationException, IOException, SAXException {
         ContentDOMpath domPath = prepareDomPath();
