@@ -1,8 +1,8 @@
 package com.vseostroyke.upload;
 
-import com.vseostroyke.upload.normalizer.MebelNormalizer;
+import com.vseostroyke.upload.http.TemplateBuilder;
+import freemarker.template.TemplateException;
 import java.io.IOException;
-import java.util.Arrays;
 import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
@@ -12,11 +12,12 @@ import org.xml.sax.SAXException;
  */
 public class Main {
 
-    public static void main(String[] args) throws IOException, ParserConfigurationException, SAXException {
+    public static void main(String[] args) throws IOException, ParserConfigurationException, SAXException, TemplateException {
+        TemplateBuilder.build();
         ContentCopier contentCopier = new ContentCopier();
-        contentCopier.copy(Arrays.asList(
-                "http://www.domovoy.by/good/id/4973/900/901"
-                , "http://www.domovoy.by/good/id/2047/700/709"),new MebelNormalizer());
+//        contentCopier.copy(Arrays.asList(
+//                "http://www.domovoy.by/good/id/4973/900/901"
+//                , "http://www.domovoy.by/good/id/2047/700/709"),new MebelNormalizer());
     }
 
 
