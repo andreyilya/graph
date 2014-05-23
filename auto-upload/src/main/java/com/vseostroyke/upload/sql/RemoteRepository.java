@@ -42,7 +42,7 @@ public class RemoteRepository {
                 " insert into wp_postmeta (post_id, meta_key, meta_value) values (@last_insert_id, 'wide', '%s');" +
                 "COMMIT;";
         return String.format(sqlTemplate
-                , contentItem.getContent()
+                , contentItem.getFinalContent()
                 , contentItem.getHeader()
                 , contentItem.getCategoryId()
                 , contentItem.getTitle()
