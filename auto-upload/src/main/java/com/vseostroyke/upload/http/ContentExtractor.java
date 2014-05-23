@@ -3,7 +3,9 @@ package com.vseostroyke.upload.http;
 import com.vseostroyke.upload.util.ResourceUtil;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.xml.parsers.ParserConfigurationException;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
@@ -19,7 +21,7 @@ public class ContentExtractor {
 
     public List<ContentItem> extract(List<String> urls) throws IOException, SAXException, ParserConfigurationException {
         List<ContentItem> contentItems = new ArrayList<>();
-        for(String url:urls) {
+        for (String url : urls) {
             contentItems.add(extract(url));
         }
         return contentItems;
@@ -41,9 +43,20 @@ public class ContentExtractor {
         contentItem.setKeywords(getAttribute(keywords, "content"));
         contentItem.setContent(getOuterHtml(content));
         contentItem.setHeader(getOuterHtml(header));
-        contentItem.setCategoryId(2L);//TODO: normal
-        contentItem.setWide("true");//TODO: normal
+        contentItem.setCategoryId(Long.parseLong(ResourceUtil.getMessage("category.id")));
+        contentItem.setWide(ResourceUtil.getMessage("wide"));
+
+        contentItem.setDynamicProperties(getDynamicProperties(doc));
+
         return contentItem;
+    }
+
+    private Map<String, String> getDynamicProperties(Document doc) {
+        Map<String, String> dynamicProperties = new HashMap<>();
+        for (String key : ResourceUtil.getDynamicProperties()) {
+            dynamicProperties.put(key, getOuterHtml(doc.select(key)));
+        }
+        return dynamicProperties;
     }
 
     private String getAttribute(Elements elements, String attribute) {
@@ -57,6 +70,7 @@ public class ContentExtractor {
             return StringUtils.EMPTY;
         }
     }
+
     private String getInnerHtml(Elements title) {
         if (title.first() != null) {
             return title.first().html();

@@ -1,5 +1,8 @@
 package com.vseostroyke.upload.http;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * User: a.radkov
  * Date: 21.05.2014
@@ -11,6 +14,14 @@ public class ContentItem {
     private String keywords;
     private String content;
     private String wide;
+
+    private String finalContent; //TODO: migrate from content to fimal content;
+
+    private Map<String, String> dynamicProperties;
+
+    public ContentItem() {
+        dynamicProperties = new HashMap<>();
+    }
 
     private Long categoryId;
 
@@ -68,5 +79,21 @@ public class ContentItem {
 
     public void setWide(String wide) {
         this.wide = wide;
+    }
+
+    public Map<String, String> getDynamicProperties() {
+        return dynamicProperties;
+    }
+
+    public void setDynamicProperties(Map<String, String> dynamicProperties) {
+        this.dynamicProperties = dynamicProperties;
+    }
+
+    public String getFinalContent() {
+        return finalContent;
+    }
+
+    public void setFinalContent(String finalContent) {
+        this.finalContent = finalContent;
     }
 }
