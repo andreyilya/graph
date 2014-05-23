@@ -1,5 +1,7 @@
 package com.vseostroyke.upload.util;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -20,5 +22,15 @@ public final class ResourceUtil {
         }
 
         return messageKey;
+    }
+
+    public static List<String> getDynamicProperties() {
+        List<String> properties = new ArrayList<>();
+        for (String key : bundle.keySet()) {
+            if (key.split("\\.")[0].equals("dynamic")) {
+                properties.add(key);
+            }
+        }
+        return properties;
     }
 }
