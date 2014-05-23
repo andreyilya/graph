@@ -1,5 +1,6 @@
 package com.vseostroyke.upload.http;
 
+import com.vseostroyke.upload.util.ResourceUtil;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -67,11 +68,11 @@ public class ContentExtractor {
 
     private ContentDOMpath prepareDomPath() {
         ContentDOMpath domPath = new ContentDOMpath();
-        domPath.setTitleXpath("title");
-        domPath.setContentXpath("#content #content");
-        domPath.setDescriptionXpath("meta[name=description]");
-        domPath.setKeywordsXpath("meta[name=keywords]");
-        domPath.setHeaderXpath("h1");
+        domPath.setTitleXpath(ResourceUtil.getMessage("xpath.title"));
+        domPath.setContentXpath(ResourceUtil.getMessage("xpath.content"));
+        domPath.setDescriptionXpath(ResourceUtil.getMessage("xpath.description"));
+        domPath.setKeywordsXpath(ResourceUtil.getMessage("xpath.keywords"));
+        domPath.setHeaderXpath(ResourceUtil.getMessage("xpath.header"));
         return domPath;
     }
 }
