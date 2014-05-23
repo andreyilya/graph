@@ -1,6 +1,7 @@
 package com.vseostroyke.upload.http;
 
 import com.vseostroyke.upload.util.ResourceUtil;
+import freemarker.template.TemplateException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,7 +20,7 @@ import org.xml.sax.SAXException;
  */
 public class ContentExtractor {
 
-    public List<ContentItem> extract(List<String> urls) throws IOException, SAXException, ParserConfigurationException {
+    public List<ContentItem> extract(List<String> urls) throws IOException, SAXException, ParserConfigurationException, TemplateException {
         List<ContentItem> contentItems = new ArrayList<>();
         for (String url : urls) {
             contentItems.add(extract(url));
@@ -27,7 +28,7 @@ public class ContentExtractor {
         return contentItems;
     }
 
-    public ContentItem extract(String url) throws ParserConfigurationException, IOException, SAXException {
+    public ContentItem extract(String url) throws ParserConfigurationException, IOException, SAXException, TemplateException {
         ContentDOMpath domPath = prepareDomPath();
         Document doc = Jsoup.connect(url).timeout(100000).get();
 
@@ -47,7 +48,7 @@ public class ContentExtractor {
         contentItem.setWide(ResourceUtil.getMessage("wide"));
 
         contentItem.setDynamicProperties(getDynamicProperties(doc));
-
+        contentItem.setFinalContent(TemplateBuilder.build(contentItem));
         return contentItem;
     }
 

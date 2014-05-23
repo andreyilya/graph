@@ -4,6 +4,7 @@ import com.vseostroyke.upload.http.ContentExtractor;
 import com.vseostroyke.upload.http.ContentItem;
 import com.vseostroyke.upload.normalizer.Normalizer;
 import com.vseostroyke.upload.sql.RemoteRepository;
+import freemarker.template.TemplateException;
 import java.io.IOException;
 import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
@@ -14,7 +15,7 @@ import org.xml.sax.SAXException;
  * Date: 22.05.2014
  */
 public class ContentCopier {
-    public void copy(List<String> urls, Normalizer normalizer) throws ParserConfigurationException, SAXException, IOException {
+    public void copy(List<String> urls, Normalizer normalizer) throws ParserConfigurationException, SAXException, IOException, TemplateException {
         //TODO: parameters from properties
         ContentExtractor contentExtractor = new ContentExtractor();
         List<ContentItem> contentItems = contentExtractor.extract(urls);

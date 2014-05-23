@@ -15,12 +15,12 @@ import java.util.Map;
  * Date: 23.05.2014
  */
 public class TemplateBuilder {
-    public static String build() throws IOException, TemplateException {
+    public static String build(ContentItem contentItem) throws IOException, TemplateException {
         Configuration cfg = new Configuration();
         cfg.setClassForTemplateLoading(TemplateBuilder.class, "/");
         Template template = cfg.getTemplate("mebelTemplate.ftl");
         Map<String, Object> data = new HashMap<>();
-        data.put("foo", "Hello World!");
+        data.put("content", contentItem.getContent());
         StringWriter stringWriter = new StringWriter();
         template.process(data, stringWriter);
         return stringWriter.toString();

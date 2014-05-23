@@ -17,7 +17,6 @@ public class Main {
 
     public static void main(String[] args) throws IOException, ParserConfigurationException, SAXException, TemplateException {
         ResourceUtil.getDynamicProperties();
-        TemplateBuilder.build();
         ContentCopier contentCopier = new ContentCopier();
         contentCopier.copy(Arrays.asList(
                 "http://www.domovoy.by/good/id/4973/900/901"
