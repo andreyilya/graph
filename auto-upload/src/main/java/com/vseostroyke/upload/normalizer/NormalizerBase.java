@@ -1,6 +1,7 @@
 package com.vseostroyke.upload.normalizer;
 
 import com.vseostroyke.upload.http.ContentItem;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -11,7 +12,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public abstract class NormalizerBase implements Normalizer {
     @Override
-    public ContentItem normalize(ContentItem contentItem) {
+    public ContentItem normalize(ContentItem contentItem) throws IOException {
         basicNormalization(contentItem);
         return contentItem;
     }
@@ -56,7 +57,7 @@ public abstract class NormalizerBase implements Normalizer {
     }
 
     @Override
-    public List<ContentItem> normalize(List<ContentItem> contentItems) {
+    public List<ContentItem> normalize(List<ContentItem> contentItems) throws IOException {
         List<ContentItem> normalizedContentItems = new ArrayList<>();
         for (ContentItem contentItem : contentItems) {
             normalizedContentItems.add(normalize(contentItem));

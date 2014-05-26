@@ -29,15 +29,14 @@ public class ContentExtractor {
     }
 
     public ContentItem extract(String url) throws ParserConfigurationException, IOException, SAXException, TemplateException {
-        ContentDOMpath domPath = prepareDomPath();
         Document doc = Jsoup.connect(url).timeout(100000).get();
 
-        Elements title = doc.select(domPath.getTitleXpath());
-        Elements description = doc.select(domPath.getDescriptionXpath());
-        Elements keywords = doc.select(domPath.getKeywordsXpath());
-        Elements content = doc.select(domPath.getContentXpath());
-        Elements header = doc.select(domPath.getHeaderXpath());
-        Elements img = doc.select(domPath.getImg());
+        Elements title = doc.select(ResourceUtil.getMessage("xpath.title"));
+        Elements description = doc.select(ResourceUtil.getMessage("xpath.description"));
+        Elements keywords = doc.select(ResourceUtil.getMessage("xpath.keywords"));
+        Elements content = doc.select(ResourceUtil.getMessage("xpath.content"));
+        Elements header = doc.select(ResourceUtil.getMessage("xpath.header"));
+        Elements img = doc.select(ResourceUtil.getMessage("xpath.img"));
 
         ContentItem contentItem = new ContentItem();
         contentItem.setTitle(getInnerHtml(title));
@@ -81,15 +80,4 @@ public class ContentExtractor {
         }
     }
 
-
-    private ContentDOMpath prepareDomPath() {
-        ContentDOMpath domPath = new ContentDOMpath();
-        domPath.setTitleXpath(ResourceUtil.getMessage("xpath.title"));
-        domPath.setContentXpath(ResourceUtil.getMessage("xpath.content"));
-        domPath.setDescriptionXpath(ResourceUtil.getMessage("xpath.description"));
-        domPath.setKeywordsXpath(ResourceUtil.getMessage("xpath.keywords"));
-        domPath.setHeaderXpath(ResourceUtil.getMessage("xpath.header"));
-        domPath.setImg(ResourceUtil.getMessage("xpath.img"));
-        return domPath;
-    }
 }

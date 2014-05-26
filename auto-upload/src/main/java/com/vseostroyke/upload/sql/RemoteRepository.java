@@ -30,6 +30,7 @@ public class RemoteRepository {
     }
 
     private String formatSql(ContentItem contentItem) {
+        //TODO: change testing-query;
         String sqlTemplate = "START TRANSACTION;" +
                 " insert into wp_posts" +
                 " (post_author, post_content, post_title, post_status, comment_status, ping_status,post_name,post_type) values" +
