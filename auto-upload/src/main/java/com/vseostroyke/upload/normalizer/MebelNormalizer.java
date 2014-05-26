@@ -1,17 +1,22 @@
 package com.vseostroyke.upload.normalizer;
 
 import com.vseostroyke.upload.http.ContentItem;
+import com.vseostroyke.upload.http.TemplateBuilder;
+import freemarker.template.TemplateException;
+import java.io.IOException;
 
 /**
  * User: a.radkov
  * Date: 22.05.2014
  */
-public class MebelNormalizer extends NormalizerBase{
+public class MebelNormalizer extends NormalizerBase {
     public static final String LOGIN = "fftdfbzs29847";
     public static final String PASSWORD = "Q8ibY.y511((32";
+
     @Override
-    public ContentItem normalize(ContentItem contentItem) {
+    public ContentItem normalize(ContentItem contentItem)  {
         ContentItem normalizedContentItem = super.normalize(contentItem);
+        normalizedContentItem.setImg("http://www.domovoy.by" + contentItem.getImg());
         //TODO: replace домовой
         saveFiles(contentItem);
         return normalizedContentItem;

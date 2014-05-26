@@ -10,7 +10,7 @@ public class ContentDOMpath {
     private String descriptionXpath;
     private String keywordsXpath;
     private String contentXpath;
-
+    private String img;
     public String getHeaderXpath() {
         return headerXpath;
     }
@@ -49,5 +49,13 @@ public class ContentDOMpath {
 
     public void setContentXpath(String contentXpath) {
         this.contentXpath = contentXpath;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }

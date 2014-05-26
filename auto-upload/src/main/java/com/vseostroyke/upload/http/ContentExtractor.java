@@ -37,6 +37,7 @@ public class ContentExtractor {
         Elements keywords = doc.select(domPath.getKeywordsXpath());
         Elements content = doc.select(domPath.getContentXpath());
         Elements header = doc.select(domPath.getHeaderXpath());
+        Elements img = doc.select(domPath.getImg());
 
         ContentItem contentItem = new ContentItem();
         contentItem.setTitle(getInnerHtml(title));
@@ -44,11 +45,11 @@ public class ContentExtractor {
         contentItem.setKeywords(getAttribute(keywords, "content"));
         contentItem.setContent(getOuterHtml(content));
         contentItem.setHeader(getOuterHtml(header));
+        contentItem.setImg(getAttribute(img, "href"));
         contentItem.setCategoryId(Long.parseLong(ResourceUtil.getMessage("category.id")));
         contentItem.setWide(ResourceUtil.getMessage("wide"));
 
         contentItem.setDynamicProperties(getDynamicProperties(doc));
-        contentItem.setFinalContent(TemplateBuilder.build(contentItem));
         return contentItem;
     }
 
@@ -88,6 +89,7 @@ public class ContentExtractor {
         domPath.setDescriptionXpath(ResourceUtil.getMessage("xpath.description"));
         domPath.setKeywordsXpath(ResourceUtil.getMessage("xpath.keywords"));
         domPath.setHeaderXpath(ResourceUtil.getMessage("xpath.header"));
+        domPath.setImg(ResourceUtil.getMessage("xpath.img"));
         return domPath;
     }
 }
