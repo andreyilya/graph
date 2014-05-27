@@ -1,3 +1,4 @@
+<b><a href="${baseUrl}" target="_blank">Исходник. Удалить ссылку!</a></b>
 <div class="atmosphere">
     <div class="right-big-photo">
         <img title="${title}" alt="${title} купить" src="http://mebel.vseostroyke.by/wp-content/uploads/kuhny-katalog/kuhni-atnosphere2.jpg" width="950" height="400" style="border:none;"/><div class="atmosphere-title" style="background: rgba(255,255,255,0.7);">Заполните заявку до 31 мая и получите <span style="color: #cc0000;">разделитель ORGA LINE в подарок!!!</span></div></div>

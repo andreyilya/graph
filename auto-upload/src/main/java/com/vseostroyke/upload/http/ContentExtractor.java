@@ -47,7 +47,7 @@ public class ContentExtractor {
         contentItem.setImg(getAttribute(img, "href"));
         contentItem.setCategoryId(Long.parseLong(ResourceUtil.getMessage("category.id")));
         contentItem.setWide(ResourceUtil.getMessage("wide"));
-
+        contentItem.setBaseUrl(url);
         contentItem.setDynamicProperties(getDynamicProperties(doc));
         return contentItem;
     }
