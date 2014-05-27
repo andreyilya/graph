@@ -8,20 +8,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
-//import org.springframework.integration.file.remote.session.Session;
 
-/**
- * Implementation of {@link } for FTP.
- * Класс взят из состава spring-integration-ftp + проведена доработка
- *
- * @author Mark Fisher
- * @author Oleg Zhurakousky
- * @author Gary Russell
- * @author Dmitry Ryabov
- * @since 2.0
- */
 public class FtpSession {
 
     public static final String SEPARATOR = "/";
@@ -93,6 +83,8 @@ public class FtpSession {
     }
 
     public void uploadToFTP(InputStream inputStream, String path) throws IOException {
+        client.setFileType(FTP.BINARY_FILE_TYPE);
+
         boolean completed = client.storeFile(path, inputStream);
         if (!completed) {
             throw new IOException("Failed to write to '" + path
@@ -103,10 +95,10 @@ public class FtpSession {
     public void uploadToFTP(File file, String fileName) throws IOException {
         FileInputStream fileInputStream = new FileInputStream(file);
         String remoteFile = "/wp-content/uploads" + fileName;
-
         if (!exists(remoteFile)) {
             mkdirs(remoteFile);
         }
+        client.setFileType(FTP.BINARY_FILE_TYPE);
         boolean completed = client.storeFile(remoteFile, fileInputStream);
         if (!completed) {
             throw new IOException("Failed to write to '" + file.getName()
