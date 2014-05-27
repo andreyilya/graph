@@ -15,4 +15,4 @@
 <div class="clearfix"></div>
 ${content}
 
-<img title="${title}" alt="${title} купить" src="${img}" /><div class="atmosphere-title">
+<img title="${title}" alt="${title} купить" src="${img}" />
