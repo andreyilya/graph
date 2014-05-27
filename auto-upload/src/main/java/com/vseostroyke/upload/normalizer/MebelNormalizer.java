@@ -3,7 +3,11 @@ package com.vseostroyke.upload.normalizer;
 import com.vseostroyke.upload.ftp.FtpSession;
 import com.vseostroyke.upload.http.ContentItem;
 import com.vseostroyke.upload.util.ResourceUtil;
+import java.awt.image.RenderedImage;
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import javax.imageio.ImageIO;
 
 /**
  * User: a.radkov
@@ -11,27 +15,34 @@ import java.io.IOException;
  */
 public class MebelNormalizer extends NormalizerBase {
 
+    public static final String D_TEMP = "d:/temp";
+
     @Override
     public ContentItem normalize(ContentItem contentItem) throws IOException {
         ContentItem normalizedContentItem = super.normalize(contentItem);
-        normalizedContentItem.setImg("http://mebel.vseostroyke.by/wp-content/upload" + contentItem.getImg());
+
+        saveFile("http://www.domovoy.by" + contentItem.getImg());
+
+        normalizedContentItem.setImg("http://mebel.vseostroyke.by/wp-content/uploads" + contentItem.getImg());
         //TODO: replace домовой
-        saveFiles(contentItem);
         return normalizedContentItem;
     }
 
-    private void saveFiles(ContentItem contentItem) throws IOException {
+    private String getFormatName(String formatName) {
+        String[] split = formatName.split("\\.");
+        return split[split.length-1];
+    }
+
+    private void saveFile(String path) throws IOException {
         FtpSession ftpSession = new FtpSession(ResourceUtil.getMessage("ftp.url"), 21
                 , ResourceUtil.getMessage("ftp.login")
                 , ResourceUtil.getMessage("ftp.password"));
 
-//        FTPFile[] listFtpFile = ftpSession.list("/wp-content/uploads");
-//        for (FTPFile ftpFile1 : listFtpFile) {
-//            System.out.println("Name - " + ftpFile1.getName() +
-//                    "Size - " + ftpFile1.getSize() +
-//                    "Link - " + ftpFile1.getLink() +
-//                    "Type - " + ftpFile1.getType());
-//        }
-//        ftpSession.uploadToFTP(new File("d://graf_monte_kristo.pdf"));
+        URL imageURL = new URL(path);
+        RenderedImage img = ImageIO.read(imageURL);
+        File outputfile = new File(D_TEMP + imageURL.getFile());
+        outputfile.mkdirs();
+        ImageIO.write(img, getFormatName(imageURL.getFile()), outputfile);
+        ftpSession.uploadToFTP(outputfile,imageURL.getFile());
     }
 }

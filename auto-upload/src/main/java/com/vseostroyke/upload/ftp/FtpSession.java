@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 //import org.springframework.integration.file.remote.session.Session;
@@ -99,9 +100,14 @@ public class FtpSession {
         }
     }
 
-    public void uploadToFTP(File file) throws IOException {
+    public void uploadToFTP(File file, String fileName) throws IOException {
         FileInputStream fileInputStream = new FileInputStream(file);
-        boolean completed = client.storeFile("/wp-content/uploads/" + file.getName(), fileInputStream);
+        String remoteFile = "/wp-content/uploads" + fileName;
+
+        if (!exists(remoteFile)) {
+            mkdirs(remoteFile);
+        }
+        boolean completed = client.storeFile(remoteFile, fileInputStream);
         if (!completed) {
             throw new IOException("Failed to write to '" + file.getName()
                     + "'. Server replied with: " + this.client.getReplyString());
@@ -138,6 +144,30 @@ public class FtpSession {
     public boolean mkdir(String remoteDirectory) throws IOException {
         client.changeToParentDirectory();
         return client.makeDirectory(remoteDirectory);
+    }
+
+    public boolean mkdirs(String remoteDirectory) throws IOException {
+        boolean dirExists = true;
+
+        //tokenize the string and attempt to change into each directory level.  If you cannot, then start creating.
+        String[] directories = remoteDirectory.split("/");
+        directories = Arrays.copyOfRange(directories, 0, directories.length - 1);
+        for (String dir : directories) {
+            if (!dir.isEmpty()) {
+                if (dirExists) {
+                    dirExists = client.changeWorkingDirectory(dir);
+                }
+                if (!dirExists) {
+                    if (!client.makeDirectory(dir)) {
+                        throw new IOException("Unable to create remote directory '" + dir + "'.  error='" + client.getReplyString() + "'");
+                    }
+                    if (!client.changeWorkingDirectory(dir)) {
+                        throw new IOException("Unable to change into newly created remote directory '" + dir + "'.  error='" + client.getReplyString() + "'");
+                    }
+                }
+            }
+        }
+        return dirExists;
     }
 
     public boolean exists(String path) throws IOException {
