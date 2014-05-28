@@ -30,11 +30,10 @@ public class RemoteRepository {
     }
 
     private String formatSql(ContentItem contentItem) {
-        //TODO: change testing-query;
         String sqlTemplate = "START TRANSACTION;" +
                 " insert into wp_posts" +
-                " (post_author, post_content, post_title, post_status, comment_status, ping_status,post_name,post_type) values" +
-                " (3,'%s','%s','draft','closed','closed','testing-query','post');" +
+                " (post_author, post_content, post_title, post_status, comment_status, ping_status,post_type) values" +
+                " (3,'%s','%s','draft','closed','closed','post');" +
                 "SET @last_insert_id = LAST_INSERT_ID();" +
                 " insert into wp_term_relationships (object_id,term_taxonomy_id) values (@last_insert_id, '%s');" +
                 " insert into wp_postmeta (post_id, meta_key, meta_value) values (@last_insert_id, '_aioseop_title', '%s');" +

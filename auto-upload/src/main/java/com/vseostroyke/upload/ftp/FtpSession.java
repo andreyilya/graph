@@ -94,7 +94,7 @@ public class FtpSession {
 
     public void uploadToFTP(File file, String fileName) throws IOException {
         FileInputStream fileInputStream = new FileInputStream(file);
-        String remoteFile = "/wp-content/uploads" + fileName;
+        String remoteFile = "/wp-content/uploads/" + fileName;
         if (!exists(remoteFile)) {
             mkdirs(remoteFile);
         }
