@@ -38,6 +38,7 @@ public class ContentExtractor {
         Elements header = doc.select(ResourceUtil.getMessage("xpath.header"));
         Elements img = doc.select(ResourceUtil.getMessage("xpath.img"));
         Elements price = doc.select(ResourceUtil.getMessage("xpath.price"));
+        Elements itemName = doc.select(ResourceUtil.getMessage("xpath.name"));
 
         ContentItem contentItem = new ContentItem();
         contentItem.setTitle(getInnerHtml(title));
@@ -50,17 +51,18 @@ public class ContentExtractor {
         contentItem.setWide(ResourceUtil.getMessage("wide"));
         contentItem.setBaseUrl(url);
         contentItem.setPrice(extractPrice(price));
+        contentItem.setItemName(itemName.get(0).childNode(0).outerHtml().replaceAll("\n", StringUtils.EMPTY));
         contentItem.setDynamicProperties(getDynamicProperties(doc));
         return contentItem;
     }
 
     private Double extractPrice(Elements price) {
         String value = getInnerHtml(price);
-       value= value.replace(" ",StringUtils.EMPTY).replace("руб.",StringUtils.EMPTY);
+        value = value.replace(" ", StringUtils.EMPTY).replace("руб.", StringUtils.EMPTY);
 
         Integer cource = Integer.parseInt(ResourceUtil.getMessage("cource"));
         //TODO: round
-        return Double.parseDouble(value)/cource;
+        return Double.parseDouble(value) / cource;
     }
 
     private Map<String, String> getDynamicProperties(Document doc) {
