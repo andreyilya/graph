@@ -40,6 +40,7 @@ public class RemoteRepository {
                 " insert into wp_postmeta (post_id, meta_key, meta_value) values (@last_insert_id, '_aioseop_description', '%s');" +
                 " insert into wp_postmeta (post_id, meta_key, meta_value) values (@last_insert_id, '_aioseop_keywords', '%s');" +
                 " insert into wp_postmeta (post_id, meta_key, meta_value) values (@last_insert_id, 'wide', '%s');" +
+                " update wp_options set option_value = CONCAT(option_value,'%s') where option_name='quickshop_products';" +
                 "COMMIT;";
         return String.format(sqlTemplate
                 , contentItem.getFinalContent()
@@ -48,7 +49,8 @@ public class RemoteRepository {
                 , contentItem.getTitle()
                 , contentItem.getDescription()
                 , contentItem.getKeywords()
-                , contentItem.getWide());
+                , contentItem.getWide()
+                , "\n" + contentItem.getItemName() + " | " + contentItem.getPrice());
     }
 
 }

@@ -24,6 +24,7 @@ public class TemplateBuilder {
         data.put("title", contentItem.getTitle());
         data.put("img", contentItem.getImg());
         data.put("baseUrl", contentItem.getBaseUrl());
+        data.put("itemName", contentItem.getItemName());
 
         for (Map.Entry<String, String> entry : contentItem.getDynamicProperties().entrySet()) {
             data.put(entry.getKey(), entry.getValue());

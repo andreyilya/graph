@@ -16,3 +16,5 @@
 ${content}
 
 <img title="${title}" alt="${title} купить" src="${img}" />
+
+[quickshop product="${itemName}"]
