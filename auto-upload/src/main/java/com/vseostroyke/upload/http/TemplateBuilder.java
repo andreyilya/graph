@@ -8,6 +8,7 @@ import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.apache.commons.lang3.StringUtils;
 
 
 /**
@@ -27,7 +28,7 @@ public class TemplateBuilder {
         data.put("itemName", contentItem.getItemName());
 
         for (Map.Entry<String, String> entry : contentItem.getDynamicProperties().entrySet()) {
-            data.put(entry.getKey(), entry.getValue());
+            data.put(entry.getKey().replace(".", StringUtils.EMPTY), entry.getValue());
 
         }
 

@@ -68,7 +68,7 @@ public class ContentExtractor {
     private Map<String, String> getDynamicProperties(Document doc) {
         Map<String, String> dynamicProperties = new HashMap<>();
         for (String key : ResourceUtil.getDynamicProperties()) {
-            dynamicProperties.put(key, getOuterHtml(doc.select(key)));
+            dynamicProperties.put(key, getOuterHtml(doc.select(ResourceUtil.getMessage(key))));
         }
         return dynamicProperties;
     }
