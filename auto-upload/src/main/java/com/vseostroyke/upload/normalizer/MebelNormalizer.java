@@ -2,6 +2,7 @@ package com.vseostroyke.upload.normalizer;
 
 import com.vseostroyke.upload.ftp.FtpSession;
 import com.vseostroyke.upload.http.ContentItem;
+import com.vseostroyke.upload.util.ImageTransformer;
 import com.vseostroyke.upload.util.ResourceUtil;
 import com.vseostroyke.upload.util.Transliterator;
 import java.awt.image.RenderedImage;
@@ -19,11 +20,14 @@ public class MebelNormalizer extends NormalizerBase {
 
     public static final String D_TEMP = "d:/temp";
     public static final String DOMOVOI = "Домовой";
+    public static final String BIG = "/big/";
+    public static final String ROOT_FOLDER = "http://mebel.vseostroyke.by/wp-content/uploads/";
+    public static final String DELIMITER = "/";
 
     @Override
     public ContentItem normalize(ContentItem contentItem) throws IOException {
         ContentItem normalizedContentItem = super.normalize(contentItem);
-        contentItem.setImg("http://www.domovoy.by" + contentItem.getImg());
+        contentItem.setBigImg("http://www.domovoy.by" + contentItem.getBigImg());
         replaceDomovoi(contentItem);
         saveFile(contentItem);
 
@@ -47,13 +51,25 @@ public class MebelNormalizer extends NormalizerBase {
                 , ResourceUtil.getMessage("ftp.login")
                 , ResourceUtil.getMessage("ftp.password"));
 
-        URL imageURL = new URL(contentItem.getImg());
+        URL imageURL = new URL(contentItem.getBigImg());
         RenderedImage img = ImageIO.read(imageURL);
-        File outputfile = new File(D_TEMP + imageURL.getFile());
+
+        File outputfile = new File(D_TEMP +BIG + imageURL.getFile());
         outputfile.mkdirs();
         ImageIO.write(img, getFormatName(imageURL.getFile()), outputfile);
+
+        RenderedImage smallImg = ImageTransformer.transformImage(outputfile) ;
+
+        File outputfileSmall = new File(D_TEMP + imageURL.getFile());
+        outputfileSmall.mkdirs();
+        ImageIO.write(smallImg, getFormatName(imageURL.getFile()), outputfileSmall);
+
+
         String folderName = Transliterator.transliterate(contentItem.getTitle()).toLowerCase();
-        ftpSession.uploadToFTP(outputfile, folderName + "/" + outputfile.getName());
-        contentItem.setImg("http://mebel.vseostroyke.by/wp-content/uploads/" + folderName + "/" + outputfile.getName());
+        ftpSession.uploadToFTP(outputfile, folderName + BIG + outputfile.getName());
+        ftpSession.uploadToFTP(outputfileSmall, folderName + DELIMITER + outputfileSmall.getName());
+
+        contentItem.setBigImg(ROOT_FOLDER + folderName + BIG + outputfile.getName());
+        contentItem.setSmallImg(ROOT_FOLDER + folderName + DELIMITER + outputfile.getName());
     }
 }

@@ -46,7 +46,7 @@ public class ContentExtractor {
         contentItem.setKeywords(getAttribute(keywords, "content"));
         contentItem.setContent(getOuterHtml(content));
         contentItem.setHeader(getOuterHtml(header));
-        contentItem.setImg(getAttribute(img, "href"));
+        contentItem.setBigImg(getAttribute(img, "href"));
         contentItem.setCategoryId(Long.parseLong(ResourceUtil.getMessage("category.id")));
         contentItem.setWide(ResourceUtil.getMessage("wide"));
         contentItem.setBaseUrl(url);

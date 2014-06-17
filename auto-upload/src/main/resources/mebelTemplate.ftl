@@ -15,7 +15,7 @@
 <div class="clearfix"></div>
 ${content}
 
-<img title="${title}" alt="${title} купить" src="${img}" />
+<a href="${bigImg}"><img title="${title}" alt="${title} купить" src="${smallImg}" /> </a>
 
 [quickshop product="${itemName}"]
 

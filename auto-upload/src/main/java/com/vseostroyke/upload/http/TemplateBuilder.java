@@ -23,7 +23,8 @@ public class TemplateBuilder {
         Map<String, Object> data = new HashMap<>();
         data.put("content", contentItem.getContent());
         data.put("title", contentItem.getTitle());
-        data.put("img", contentItem.getImg());
+        data.put("bigImg", contentItem.getBigImg());
+        data.put("smallImg", contentItem.getSmallImg());
         data.put("baseUrl", contentItem.getBaseUrl());
         data.put("itemName", contentItem.getItemName());
 
