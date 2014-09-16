@@ -40,6 +40,9 @@ public class RemoteRepository {
                 " insert into wp_postmeta (post_id, meta_key, meta_value) values (@last_insert_id, '_aioseop_description', '%s');" +
                 " insert into wp_postmeta (post_id, meta_key, meta_value) values (@last_insert_id, '_aioseop_keywords', '%s');" +
                 " insert into wp_postmeta (post_id, meta_key, meta_value) values (@last_insert_id, 'wide', '%s');" +
+                " insert into wp_postmeta (post_id, meta_key, meta_value) values (@last_insert_id, 'post-img', '%s');" +
+                " insert into wp_postmeta (post_id, meta_key, meta_value) values (@last_insert_id, 'main_full_width', 'true');" +
+                " insert into wp_postmeta (post_id, meta_key, meta_value) values (@last_insert_id, 'color', '%s');" +
                 " update wp_options set option_value = CONCAT(option_value,'%s') where option_name='quickshop_products';" +
                 "COMMIT;";
         return String.format(sqlTemplate
@@ -50,7 +53,9 @@ public class RemoteRepository {
                 , contentItem.getDescription()
                 , contentItem.getKeywords()
                 , contentItem.getWide()
-                , "\n" + contentItem.getItemName() + " | " + contentItem.getPrice());
+                , contentItem.getSmallImg()
+                , contentItem.getCodeFull()
+                , "\n" + contentItem.getItemName() + " | " + contentItem.getPrice().intValue() + "р");
     }
 
 }
