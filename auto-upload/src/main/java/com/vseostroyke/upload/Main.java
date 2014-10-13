@@ -19,13 +19,14 @@ import org.xml.sax.SAXException;
  */
 public class Main {
     private static final String DUMP_FILE = "dump.file";
-    public static final long CATEGORY_ID = 15L;
-    public static final double PRICE = 305000D;
-    public static final String SIZE = "20,30,40 x 10 x 3";
-    public static final String COUNT = "35";
-    public static final String COLLECTION = "Слоистый кварц";
-    public static final String COLLECTION_LINK = "sloisty-kvarz";
-    public static final String WEIGHT = "45";
+    public static final Long CATEGORY_ID = 35L;
+    public static final double PRICE = 170000D;
+    public static final String SIZE = "19,6 х 6,2 х 1,0-1,4";
+    public static final String COUNT = "46";
+    public static final String COLLECTION = "Кирпич Венеция";
+    public static final String COLLECTION_LINK = "kirpich-venecia";
+    public static final String WEIGHT = "12.3";
+    public static final String PACKSIZE = "0.68";
     public static final String UGOL = "есть";
 
 
@@ -37,15 +38,10 @@ public class Main {
 //                , "http://www.domovoy.by/good/id/2047/700/709"), new MebelNormalizer());
 
         Map<String, String> codes = new HashMap<>();
-        codes.put("100П", "100");
-        codes.put("101П", "101");
-        codes.put("102П", "102");
-        codes.put("103П", "103");
-        codes.put("107П", "107");
-        codes.put("108П", "108");
-        codes.put("109П", "109");
-        codes.put("118П", "118");
-        codes.put("119П", "119");
+        codes.put("2600П", "2600");
+        codes.put("2605П", "2605");
+
+
 
 
 
@@ -69,9 +65,9 @@ public class Main {
             contentItem.setCode(codes.get(key));
 
             contentItem.setHeader("Декоративный камень «" + COLLECTION + " " + key + "»");
-            contentItem.setTitle("Купить декоративный искусственный камень «" + COLLECTION + " " + key + "» - цена, фото");
+            contentItem.setTitle("Высококачественный декоративный камень «" + COLLECTION + " " + key + "» - купите по низкой цене!");
             contentItem.setKeywords(COLLECTION + " " + key);
-            contentItem.setDescription("Предлагаем купить декоративный камень «" + COLLECTION + " " + key + "»  в Минске и РБ с Доставкой. Высокое качество форм! Литовский цемент Portland DO! Низкие цены!");
+            contentItem.setDescription("декоративный камень «" + COLLECTION + " " + key + "» покупают в лучшем интернет-магазине  \"Линия Камня\". Наличие на складе. Скидки на обьем. Доставка по Минску и РБ");
             contentItem.setWide("true");
             contentItem.setItemName(COLLECTION + " " + key);
             contentItem.setPrice(PRICE);

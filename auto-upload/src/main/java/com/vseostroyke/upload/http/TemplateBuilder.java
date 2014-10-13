@@ -41,7 +41,7 @@ public class TemplateBuilder {
         // template.process(data, stringWriter);
 
 
-        return "[one_stone code=\"COLLECTION CODE_FULL\" photo=\"/wp-content/uploads/LINK/CODE.jpg\" photo_big=\"/wp-content/uploads/LINK/big/CODE.jpg\" alt=\"Искусственный камень из бетона COLLECTION CODE_FULL\" title=\"декоративный камень из бетона COLLECTION CODE_FULL\" size=\"SIZE\" count=\"COUNT\" ugol=\"UGOL\" weight=\"WEIGHT\" text=\"\" beton=\"true\"]\n\n[beton_action]"
+        return "[one_stone code=\"COLLECTION CODE_FULL\" photo=\"/wp-content/uploads/LINK/CODE.jpg\" photo_big=\"/wp-content/uploads/LINK/big/CODE.jpg\" alt=\"Искусственный камень из бетона COLLECTION CODE_FULL\" title=\"декоративный камень из бетона COLLECTION CODE_FULL\" size=\"SIZE\" count=\"COUNT\" ugol=\"UGOL\" weight=\"WEIGHT\" text=\"\" beton=\"true\" packsize=\"PACK\"]\n\n[beton_action]"
                 .replace("CODE_FULL", contentItem.getCodeFull())
                 .replace("CODE", contentItem.getCode())
                 .replace("COLLECTION", Main.COLLECTION)
@@ -49,7 +49,8 @@ public class TemplateBuilder {
                 .replace("WEIGHT",Main.WEIGHT)
                 .replace("COUNT",Main.COUNT)
                 .replace("SIZE",Main.SIZE)
-                .replace("UGOL", Main.UGOL);
+                .replace("UGOL", Main.UGOL)
+                .replace("PACK", Main.PACKSIZE);
     }
 
     public static void build(List<ContentItem> contentItems) throws IOException, TemplateException {
