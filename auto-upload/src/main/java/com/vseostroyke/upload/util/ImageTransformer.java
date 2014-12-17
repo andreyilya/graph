@@ -22,6 +22,55 @@ public final class ImageTransformer {
     private ImageTransformer() {
     }
 
+    public static RenderedImage transformImage(File path, Double width, Double height) throws IOException {
+        BufferedImage image = ImageIO.read(path);
+
+        int imageWidth = image.getWidth();
+        int imageHeight = image.getHeight();
+
+        double scaleX = width / imageWidth;
+        double scaleY = height / imageHeight;
+        if (scaleX > scaleY) {
+            AffineTransform scaleTransform = AffineTransform.getScaleInstance(scaleY, scaleY);
+            AffineTransformOp bilinearScaleOp = new AffineTransformOp(scaleTransform, AffineTransformOp.TYPE_BILINEAR);
+            image = bilinearScaleOp.filter(
+                    image,
+                    new BufferedImage((int) (imageWidth * scaleY), height.intValue(), image.getType()));
+
+
+            BufferedImage resizedImage = new BufferedImage(width.intValue(), height.intValue(), BufferedImage.TYPE_INT_RGB);
+            Graphics2D g = resizedImage.createGraphics();
+            g.setColor(Color.white);
+
+            g.fillRect(0, 0, width.intValue(), height.intValue());
+
+            //new for background
+            g.drawImage(image.getSubimage(image.getWidth() - 1, 0, 1, image.getHeight()), ((int) (imageWidth * scaleY)) / 2, 0, (int) (imageWidth * scaleY), height.intValue(), null);
+            g.drawImage(image.getSubimage(1, 0, 1, image.getHeight()), 0, 0, ((int) (imageWidth * scaleY)) / 2, height.intValue(), null);
+
+            //old
+            g.drawImage(image, (width.intValue() - (int) (imageWidth * scaleY)) / 2, 0, (int) (imageWidth * scaleY), height.intValue(), null);
+
+            return resizedImage;
+        } else {
+            AffineTransform scaleTransform = AffineTransform.getScaleInstance(scaleX, scaleX);
+            AffineTransformOp bilinearScaleOp = new AffineTransformOp(scaleTransform, AffineTransformOp.TYPE_BILINEAR);
+            image = bilinearScaleOp.filter(
+                    image,
+                    new BufferedImage(width.intValue(), (int) (imageHeight * scaleX), image.getType()));
+
+
+            BufferedImage resizedImage = new BufferedImage(width.intValue(), height.intValue(), BufferedImage.TYPE_INT_RGB);
+            Graphics2D g = resizedImage.createGraphics();
+            g.setColor(Color.WHITE);
+
+            g.fillRect(0, 0, width.intValue(), height.intValue());
+            g.drawImage(image, 0, (height.intValue() - (int) (imageHeight * scaleX)) / 2, width.intValue(), (int) (imageHeight * scaleX), null);
+            return resizedImage;
+        }
+    }
+
+
     public static RenderedImage transformImage(File path) throws IOException {
         BufferedImage image = ImageIO.read(path);
 
