@@ -7,6 +7,7 @@ import com.vseostroyke.upload.util.ImageTransformer;
 import com.vseostroyke.upload.util.ResourceUtil;
 import freemarker.template.TemplateException;
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
@@ -14,7 +15,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
+import javax.imageio.stream.FileImageOutputStream;
 import javax.xml.parsers.ParserConfigurationException;
 import org.apache.commons.io.FileUtils;
 import org.xml.sax.SAXException;
@@ -38,8 +43,19 @@ public class MainForImage {
         for (File file : files) {
 
             RenderedImage newBufferedImage =  ImageTransformer.transformImage(new File(SOURCE_FOLDER + file.getName()),WIDTH,HEIGHT);
-                ImageIO.write(newBufferedImage, "jpg", new File(DEST_FOLDER
-                        + file.getName()));
+           //DO NOT USE ImageIo directly  !!!
+            ImageWriter writer;
+            FileImageOutputStream output;
+
+            writer = ImageIO.getImageWritersByFormatName("jpeg").next();
+            ImageWriteParam param = writer.getDefaultWriteParam();
+            param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
+            param.setCompressionQuality(1);
+            output = new FileImageOutputStream(new File(DEST_FOLDER
+                    + file.getName()));
+            writer.setOutput(output);
+            IIOImage iioImage = new IIOImage(newBufferedImage, null, null);
+            writer.write(null, iioImage, param);
 
         }
     }
