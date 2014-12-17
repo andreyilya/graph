@@ -1,20 +1,11 @@
 package com.vseostroyke.upload;
 
-import com.vseostroyke.upload.http.ContentItem;
-import com.vseostroyke.upload.http.TemplateBuilder;
-import com.vseostroyke.upload.sql.RemoteRepository;
 import com.vseostroyke.upload.util.ImageTransformer;
-import com.vseostroyke.upload.util.ResourceUtil;
 import freemarker.template.TemplateException;
-import java.awt.Color;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageWriteParam;
@@ -42,8 +33,8 @@ public class MainForImage {
         Collection<File> files = FileUtils.listFiles(sourceFolder, new String[]{"jpg"}, false);
         for (File file : files) {
 
-            RenderedImage newBufferedImage =  ImageTransformer.transformImage(new File(SOURCE_FOLDER + file.getName()),WIDTH,HEIGHT);
-           //DO NOT USE ImageIo directly  !!!
+            RenderedImage newBufferedImage = ImageTransformer.transformImage(new File(SOURCE_FOLDER + file.getName()), WIDTH, HEIGHT);
+            //DO NOT USE ImageIo directly  !!!
             ImageWriter writer;
             FileImageOutputStream output;
 
