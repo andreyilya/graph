@@ -65,6 +65,12 @@ public final class ImageTransformer {
             g.setColor(Color.WHITE);
 
             g.fillRect(0, 0, width.intValue(), height.intValue());
+
+            //new for background
+            g.drawImage(image.getSubimage(0, 0, image.getWidth(), 1), 0, 0, width.intValue(), image.getHeight()-((int) (imageHeight * scaleX)) / 5, null);
+            g.drawImage(image.getSubimage(0, image.getHeight()-1, image.getWidth(), 1), 0, image.getHeight()-((int) (imageHeight * scaleX)) /5, width.intValue(), height.intValue(), null);
+
+
             g.drawImage(image, 0, (height.intValue() - (int) (imageHeight * scaleX)) / 2, width.intValue(), (int) (imageHeight * scaleX), null);
             return resizedImage;
         }
