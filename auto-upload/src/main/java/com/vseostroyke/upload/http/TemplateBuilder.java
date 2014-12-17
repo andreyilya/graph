@@ -41,16 +41,12 @@ public class TemplateBuilder {
         // template.process(data, stringWriter);
 
 
-        return "[one_stone code=\"COLLECTION CODE_FULL\" photo=\"/wp-content/uploads/LINK/CODE.jpg\" photo_big=\"/wp-content/uploads/LINK/big/CODE.jpg\" alt=\"Искусственный камень из бетона COLLECTION CODE_FULL\" title=\"декоративный камень из бетона COLLECTION CODE_FULL\" size=\"SIZE\" count=\"COUNT\" ugol=\"UGOL\" weight=\"WEIGHT\" text=\"\" beton=\"true\" packsize=\"PACK\"]\n\n[beton_action]"
-                .replace("CODE_FULL", contentItem.getCodeFull())
+        return "[one_lepnina code=\"CODE\" base=\"BASE\" with_photo=\"WITH_PHOTO\" without_sechenie=\"true\" type=\"TYPE\" category_url=\"LINK\"]"
                 .replace("CODE", contentItem.getCode())
-                .replace("COLLECTION", Main.COLLECTION)
                 .replace("LINK", Main.COLLECTION_LINK)
-                .replace("WEIGHT",Main.WEIGHT)
-                .replace("COUNT",Main.COUNT)
-                .replace("SIZE",Main.SIZE)
-                .replace("UGOL", Main.UGOL)
-                .replace("PACK", Main.PACKSIZE);
+                .replace("WITH_PHOTO",Main.WITH_PHOTO)
+                .replace("BASE",Main.BASE)
+                .replace("TYPE",Main.TYPE);
     }
 
     public static void build(List<ContentItem> contentItems) throws IOException, TemplateException {

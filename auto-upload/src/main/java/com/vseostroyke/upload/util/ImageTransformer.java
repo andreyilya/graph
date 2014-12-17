@@ -19,17 +19,18 @@ public final class ImageTransformer {
     public static final Double IMAGE_WIDTH = Double.parseDouble(ResourceUtil.getMessage("photo.width"));
     public static final Double IMAGE_HEIGHT = Double.parseDouble(ResourceUtil.getMessage("photo.height"));
 
-    private ImageTransformer(){}
+    private ImageTransformer() {
+    }
 
     public static RenderedImage transformImage(File path) throws IOException {
         BufferedImage image = ImageIO.read(path);
 
-        int imageWidth  = image.getWidth();
+        int imageWidth = image.getWidth();
         int imageHeight = image.getHeight();
 
-        double scaleX = IMAGE_WIDTH /imageWidth;
-        double scaleY = IMAGE_HEIGHT /imageHeight;
-        if(scaleX>scaleY) {
+        double scaleX = IMAGE_WIDTH / imageWidth;
+        double scaleY = IMAGE_HEIGHT / imageHeight;
+        if (scaleX > scaleY) {
             AffineTransform scaleTransform = AffineTransform.getScaleInstance(scaleY, scaleY);
             AffineTransformOp bilinearScaleOp = new AffineTransformOp(scaleTransform, AffineTransformOp.TYPE_BILINEAR);
             image = bilinearScaleOp.filter(
@@ -44,7 +45,7 @@ public final class ImageTransformer {
             g.fillRect(0, 0, IMAGE_WIDTH.intValue(), IMAGE_HEIGHT.intValue());
             g.drawImage(image, (IMAGE_WIDTH.intValue() - (int) (imageWidth * scaleY)) / 2, 0, (int) (imageWidth * scaleY), IMAGE_HEIGHT.intValue(), null);
             return resizedImage;
-        }else{
+        } else {
             AffineTransform scaleTransform = AffineTransform.getScaleInstance(scaleX, scaleX);
             AffineTransformOp bilinearScaleOp = new AffineTransformOp(scaleTransform, AffineTransformOp.TYPE_BILINEAR);
             image = bilinearScaleOp.filter(
@@ -57,7 +58,7 @@ public final class ImageTransformer {
             g.setColor(Color.WHITE);
 
             g.fillRect(0, 0, IMAGE_WIDTH.intValue(), IMAGE_HEIGHT.intValue());
-            g.drawImage(image, 0, (IMAGE_HEIGHT.intValue()-(int) (imageHeight * scaleX))/2, IMAGE_WIDTH.intValue(), (int) (imageHeight * scaleX), null);
+            g.drawImage(image, 0, (IMAGE_HEIGHT.intValue() - (int) (imageHeight * scaleX)) / 2, IMAGE_WIDTH.intValue(), (int) (imageHeight * scaleX), null);
             return resizedImage;
         }
     }

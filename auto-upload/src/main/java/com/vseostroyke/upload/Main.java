@@ -5,12 +5,16 @@ import com.vseostroyke.upload.http.TemplateBuilder;
 import com.vseostroyke.upload.sql.RemoteRepository;
 import com.vseostroyke.upload.util.ResourceUtil;
 import freemarker.template.TemplateException;
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collection;
 import java.util.List;
-import java.util.Map;
+import javax.imageio.ImageIO;
 import javax.xml.parsers.ParserConfigurationException;
+import org.apache.commons.io.FileUtils;
 import org.xml.sax.SAXException;
 
 /**
@@ -20,14 +24,11 @@ import org.xml.sax.SAXException;
 public class Main {
     private static final String DUMP_FILE = "dump.file";
     public static final Long CATEGORY_ID = 35L;
-    public static final double PRICE = 170000D;
-    public static final String SIZE = "19,6 х 6,2 х 1,0-1,4";
-    public static final String COUNT = "46";
-    public static final String COLLECTION = "Кирпич Венеция";
-    public static final String COLLECTION_LINK = "kirpich-venecia";
-    public static final String WEIGHT = "12.3";
-    public static final String PACKSIZE = "0.68";
-    public static final String UGOL = "есть";
+    public static final String TYPE = "interer";
+    public static final String BASE = "polukolonny";
+    public static final String COLLECTION = "Дополнительные элементы полуколонн";
+    public static final String COLLECTION_LINK = "polukolonny";
+    public static final String WITH_PHOTO = "false";
 
 
     public static void main(String[] args) throws IOException, ParserConfigurationException, SAXException, TemplateException {
@@ -37,9 +38,24 @@ public class Main {
 //                "http://www.domovoy.by/good/id/4973/900/901"
 //                , "http://www.domovoy.by/good/id/2047/700/709"), new MebelNormalizer());
 
-        Map<String, String> codes = new HashMap<>();
-        codes.put("2600П", "2600");
-        codes.put("2605П", "2605");
+//        Map<String, String> codes = new HashMap<>();
+
+
+        List<String> codes = new ArrayList<>();
+        codes.add("1.18.002");
+        codes.add("1.18.001");
+        codes.add("1.18.003");
+        codes.add("1.17.600");
+        codes.add("1.15.100");
+        codes.add("1.15.300");
+        codes.add("1.15.200");
+
+
+
+
+
+
+
 
 
 
@@ -51,27 +67,68 @@ public class Main {
         RemoteRepository remoteRepository = new RemoteRepository();
         remoteRepository.generateSqlFile(contentItems, ResourceUtil.getMessage(DUMP_FILE));
 
+        /*String pathname = "d:\\Downloads\\foto\\lepnina\\";
+        File file1 = new File(pathname);
+        Collection<File> files = FileUtils.listFiles(file1, new String[]{"png"}, false);
+        for (File file : files) {
+            if (file.getName().contains("-1")) {
+                File destFile = new File(pathname + file.getName().replace("-1", "-photo1"));
+                FileUtils.copyFile(file, destFile);
 
+                BufferedImage img = ImageIO.read(new File(pathname + file.getName().replace("-1", "-photo1")));
+
+                BufferedImage newBufferedImage = new BufferedImage(img.getWidth(),
+                        img.getHeight(), BufferedImage.TYPE_INT_RGB);
+                newBufferedImage.createGraphics().drawImage(img, 0, 0, Color.WHITE, null);
+                ImageIO.write(newBufferedImage, "jpg", new File(pathname + file.getName().replace("-1", "-photo1").replace("png", "jpg")));
+                 FileUtils.forceDelete(file);
+                FileUtils.forceDelete(destFile);
+            } else if (file.getName().contains("-2")) {
+                File destFile = new File(pathname + file.getName().replace("-2", "-photo2"));
+                FileUtils.copyFile(file, destFile);
+
+                BufferedImage img = ImageIO.read(new File(pathname + file.getName().replace("-2", "-photo2")));
+
+                BufferedImage newBufferedImage = new BufferedImage(img.getWidth(),
+                        img.getHeight(), BufferedImage.TYPE_INT_RGB);
+                newBufferedImage.createGraphics().drawImage(img, 0, 0, Color.WHITE, null);
+                ImageIO.write(newBufferedImage, "jpg", new File(pathname + file.getName().replace("-2", "-photo2").replace("png", "jpg")));
+                 FileUtils.forceDelete(file);
+                FileUtils.forceDelete(destFile);
+            } else if (file.getName().contains("-s")) {
+                File destFile = new File(pathname + file.getName().replace("-s", "-sechenie"));
+                FileUtils.copyFile(file, destFile);
+
+                BufferedImage img = ImageIO.read(new File(pathname + file.getName().replace("-s", "-sechenie")));
+                BufferedImage newBufferedImage = new BufferedImage(img.getWidth(),
+                        img.getHeight(), BufferedImage.TYPE_INT_RGB);
+                newBufferedImage.createGraphics().drawImage(img, 0, 0, Color.WHITE, null);
+                ImageIO.write(newBufferedImage, "jpg", new File(pathname + file.getName().replace("-s", "-sechenie").replace("png", "jpg")));
+                  FileUtils.forceDelete(file);
+                FileUtils.forceDelete(destFile);
+            }
+
+
+        }  */
     }
 
-    private static List<ContentItem> createContentItems(Map<String, String> codes) {
+    private static List<ContentItem> createContentItems(List<String> codes) {
         List<ContentItem> contentItems = new ArrayList<>();
-        for (String key : codes.keySet()) {
+        for (String code : codes) {
             ContentItem contentItem = new ContentItem();
 
             contentItem.setCategoryId(CATEGORY_ID);
 
-            contentItem.setCodeFull(key);
-            contentItem.setCode(codes.get(key));
+            contentItem.setCodeFull(code);
+            contentItem.setCode(code);
 
-            contentItem.setHeader("Декоративный камень «" + COLLECTION + " " + key + "»");
-            contentItem.setTitle("Высококачественный декоративный камень «" + COLLECTION + " " + key + "» - купите по низкой цене!");
-            contentItem.setKeywords(COLLECTION + " " + key);
-            contentItem.setDescription("декоративный камень «" + COLLECTION + " " + key + "» покупают в лучшем интернет-магазине  \"Линия Камня\". Наличие на складе. Скидки на обьем. Доставка по Минску и РБ");
+            contentItem.setHeader(COLLECTION + " из полиуретана " + code);
+            contentItem.setTitle(COLLECTION + " из полиуретана " + code + " - Европласт");
+            contentItem.setKeywords(COLLECTION + " " + code);
+            contentItem.setDescription("Купить " + COLLECTION + " " + code + " из полиуретана в Минске и РБ. В наличии. Дешевая доставка по РБ. Бесплатный выезд с образцами по Минску! Есть дизайнеры и монтажники");
             contentItem.setWide("true");
-            contentItem.setItemName(COLLECTION + " " + key);
-            contentItem.setPrice(PRICE);
-            contentItem.setSmallImg("http://liniyakamnya.by/wp-content/uploads/" + COLLECTION_LINK + "/" + codes.get(key) + ".jpg");
+            contentItem.setItemName(code);
+            contentItem.setSmallImg("http://lepnina.vseostroyke.by/wp-content/uploads/" + BASE + "/" + code + ".jpg");
             contentItems.add(contentItem);
         }
         return contentItems;
